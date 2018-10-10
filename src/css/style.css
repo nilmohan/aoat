@@ -1,0 +1,124 @@
+.my-card-style{
+    margin-bottom: 10px;
+    width: "35rem";
+}
+
+.page-content-style{
+    margin-left: 40px;
+}
+
+.logo-image{
+    color: white;
+    padding-left: -21px;
+    position: relative;
+    left: -36px;
+    top: -8px;
+    font-size: 27px;
+    font-weight: 800;
+}
+.custom-fa-circle{
+    color: #1e4789;
+    margin-left: 35px;
+}
+
+.app-header-name{
+    position: relative;
+    /*top: -20px;*/
+    /*left: -25px;*/
+    font-style: italic;
+    font-size: 20px;
+    color: white;
+}
+.nab-bar-style{
+    background-color: #5182d1;
+}
+.card-header{
+    background-color: #5182d1 !important;
+}
+
+.card-img-content{
+    height: 180px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    color: white;
+}
+
+.sticky + .page-content-style {
+    padding-top: 110px;
+}
+.form-control{
+    width: 350px !important;
+}
+.search-form-panel{
+    margin-left: 15%;
+}
+
+footer {
+    /*background-color: #333;*/
+    background-color: #5182d1;
+    padding: 50px;
+
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+footer p {
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+}
+.card-custom-fa-circle{
+    color: #1e4789;
+}
+.card-logo-image{
+    color: white;
+    padding-left: -21px;
+    position: relative;
+    left: -13px;
+    top: -3px;
+    font-size: 12px;
+    font-weight: 800;
+}
+.card-header-name {
+    position: relative;
+    top: -2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 95px;
+    display: inline-block;
+    font-weight: 800;
+}
+.rating-class{
+    margin-left: 24px;
+    position: relative;
+    top: -12px;
+    color: darkred;
+}
+
+.ml-auto, .mx-auto {
+    margin-left: 10%;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: 150px!important;
+}
+
+.header-profile-image{
+    max-width: 100%;
+    height: 30px !important;
+    border-radius: 50%;
+}

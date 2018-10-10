@@ -1,0 +1,139 @@
+.logo-image{
+    color: #212529;
+    padding-left: -21px;
+    position: relative;
+    left: -40px;
+    top: -12px;
+    font-size: 27px;
+    font-weight: 800;
+}
+.app-header-name{
+    position: relative;
+    font-style: italic;
+    font-size: 20px;
+    color: white;
+}
+.card-custom-fa-circle{
+    color: #fff;
+}
+
+.app-header-name{
+    position: relative;
+    font-style: italic;
+    font-size: 20px;
+    color: white;
+}
+
+.custom-fa-circle{
+    margin-left: 35px;
+}
+
+
+
+.card-header{
+    background-color: #343a40 !important;
+}
+
+.card-img-content{
+    height: 180px;
+}
+
+.card-logo-image{
+    color: #343a40;
+    padding-left: -21px;
+    position: relative;
+    left: -11px;
+    top: -1px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.card-header-name {
+    position: relative;
+    top: -2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 95px;
+    display: inline-block;
+    font-size: xx-small;
+    font-weight: 600;
+}
+.rating-class{
+    margin-left: 24px;
+    position: relative;
+    top: -12px;
+    color: #FF6F50;
+    font-size: x-small;
+}
+.rating-color{
+    color: #FF6F50;
+}
+.card-img-content{
+    height: 140px;
+}
+.my-card-style{
+    width: 12rem!important;
+}
+
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(3.25rem - 1px) 0 0;
+}
+.card-header {
+    padding: -0.25rem 1.25rem!important;
+}
+.card-body{
+    font-size: 12px;
+    padding: 0.25rem;
+}
+
+
+footer {
+    background-color: #343a40;
+    padding: 50px;
+    font-size: 80%;
+}
+
+.footer-nav {
+    list-style: none;
+    float: left;
+}
+
+
+.section-steps {
+    background-color: #f4f4f4;
+}
+
+section {
+    padding: 80px 0;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+
+
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+h2:after {
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}

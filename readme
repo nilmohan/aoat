@@ -1,0 +1,139 @@
+nilmohan@NILMOHAN-M-M31H aoat $ pwd
+/Users/nilmohan/my_nodejs/aoat
+nilmohan@NILMOHAN-M-M31H aoat $ yarn
+nilmohan@NILMOHAN-M-M31H aoat $ yarn test -- --watch
+nilmohan@NILMOHAN-M-M31H aoat $ yarn run dev-server
+nilmohan@NILMOHAN-M-M31H aoat $ yarn add url-loader file-loader
+
+nilmohan@NILMOHAN-M-M31H aoat $ yarn add bootstrap
+nilmohan@NILMOHAN-M-M31H aoat $ yarn add reactstrap
+nilmohan@NILMOHAN-M-M31H aoat $ yarn add react-firebase-file-uploader
+nilmohan@NILMOHAN-M-M31H aoat $ yarn add react-star-rating
+https://www.npmjs.com/package/react-star-ratings
+
+nilmohan@NILMOHAN-M-M31H aoat $ yarn add react-rating
+http://dreyescat.github.io/react-rating/
+http://dreyescat.github.io/react-rating/
+
+/*
+<header className="header">
+    <div className="content-container">
+      <div className="header__content">
+        <Link className="header__title" to="/dashboard">
+          <h1>Boilerplate</h1>
+        </Link>
+        <button className="button button--link" onClick={startLogout}>Logout</button>
+      </div>
+    </div>
+  </header>*/
+
+  http://reactstrap.github.io/
+  https://reactstrap.github.io/components/tables/
+
+
+
+   <header className="header">
+      <div className="content-container">
+        <div className="header__content">
+          <Link className="header__title" to="/dashboard">
+            <h1>Hi </h1>{props.loginUser.name} <h1>! </h1>
+          </Link>
+          <button className="button button--link" onClick={props.startLogout}>Logout</button>
+        </div>
+      </div>
+    </header>
+
+
+
+
+    <nav class="navbar sticky-top navbar-dark navbar-expand-sm bg-dark">
+
+            <div class="container">
+            <a class="navbar-brand" href="#">Navbar Sticky Top</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+            <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Link 1</a>
+        <a href="#" class="dropdown-item">Link 2</a>
+        <a href="#" class="dropdown-item">Link 3</a>
+        </div>
+        </li>
+        </ul>
+
+        <form class="form-inline ml-auto">
+            <input type="text" class="form-control mr-2" placeholder="Search"/>
+            <button class="btn btn-outline-success">Search</button>
+            </form>
+            </div>
+            </div>
+            </nav>
+
+
+                    /*<StarRating name="small-rating" disabled={true} size={30} totalStars={5} rating= {3} />*/
+
+
+
+                    //Due to this item fantawasome was not loading
+                    {
+                            test: /\.(png|jp(e*)g|svg)$/,
+                            use: [{
+                              loader: 'url-loader',
+                              options: {
+                                limit: 25000, // Convert images < 8kb to base64 strings
+                                name: '[name].[ext]',
+                                outputPath: '/images',
+                                publicPath: '/images'
+                              }
+                            }]
+                          }
+
+
+Tuition Jugard
+
+https://www.instamojo.com/
+https://razorpay.com/pricing/
+https://help.shopify.com/en/questions
+
+
+    <Switch>
+        <PublicRoute path="/" component={LoginPage} exact={true} />
+        <PublicRoute path="/publicProfile" component={PublicProfile} exact={true} />
+        <PrivateRoute path="/dashboard" component={DashboardPage} />
+        <PrivateRoute path="/privateProfile" component={PrivateProfile} />
+
+        <Route component={NotFoundPage} />
+      </Switch>
+
+
+      https://tuitions.vedantu.com/home-tuitions-sign-up-page-new/?channel=in_ggle_sem-s_cpc_txt-lp_dp&utm_source=in&utm_medium=ggle_sem-s_cpc&utm_content=home-BMM-2&utm_campaign=RLSA&utm_term=%2Bhome%20%2Btuition&redirect=https%3A%2F%2Fwww.vedantu.com%2Fv%2F%3Fpixeldrop%3Dunbounce22&gclid=Cj0KCQjw3ebdBRC1ARIsAD8U0V7p48ZN3BQenBwC0nWSWyyhIfvf0S0TAAlxblvqfaCXCYlKR30cl1AaAnZ2EALw_wcB
+      https://tuitions.vedantu.com/home-tuitions-sign-up-page-new/?channel=in_ggle_sem-s_cpc_txt-lp_dp&utm_source=in&utm_medium=ggle_sem-s_cpc&utm_content=home-BMM-2&utm_campaign=RLSA&utm_term=%2Bhome%20%2Btuition&redirect=https%3A%2F%2Fwww.vedantu.com%2Fv%2F%3Fpixeldrop%3Dunbounce22&gclid=Cj0KCQjw3ebdBRC1ARIsAD8U0V7p48ZN3BQenBwC0nWSWyyhIfvf0S0TAAlxblvqfaCXCYlKR30cl1AaAnZ2EALw_wcB
+      https://www.urbanclap.com/bangalore-tutor-at-home?gclid=Cj0KCQjw3ebdBRC1ARIsAD8U0V4QeFVgeXcl3XuGQ2OcojzUUDNvq3-W6yFPB9rTG1yKFIs6uM5DmzkaAvGAEALw_wcB&utm_source=google&utm_medium=cpc&utm_campaign=Google-BLR-Cust-Lessons-HT-Web-Search-book-Cat_Generic-Geo_Bangalore-Ad_Bangalore-Kw_IncLocation-HT_Exact_SKAG_vJan18&utm_source=google&utm_medium=cpc&ef_id=W2kJ1wAABWFa0OfW:20181008034702:s
+
+
+export const startEditUser = (id, updates) => {
+    return (dispatch, getState) => {
+
+        return storage.child(`profile/${id}`).put(image[0]).then((snapshot) => {
+                let updatedUser = {...updates, pictureUrl: snapshot.metadata.downloadURLs[0]};
+        return database.ref(`users/${id}`).update(updatedUser).then(() => {
+                dispatch(editUser(id, updatedUser));
+        });
+    };
+};
