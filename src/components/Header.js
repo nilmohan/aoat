@@ -32,9 +32,9 @@ export class Header extends React.Component {
     }
     getLogInOrOutField(){
         if(this.props.isPrivate == true){
-            return (<Button color="link" onClick={this.props.startLogout}>LogOut</Button>);
+            return (<Button color="link" onClick={this.props.startLogout} className="login-logout-link">LogOut</Button>);
         }else{
-            return (<Button color="link" onClick={this.props.startLogin}>LogIn</Button>);
+            return (<Button color="link" onClick={this.props.startLogin} className="login-logout-link">LogIn</Button>);
         }
     }
     render() {
@@ -55,38 +55,29 @@ export class Header extends React.Component {
                         <NavItem className="navbar-nav ml-auto">
                             <NavLink to="/home" className="nav-link" exact={true}>Home</NavLink>
                         </NavItem>
+                        <NavItem className="navbar-nav ml-auto">
+                            <NavLink to="/about" className="nav-link" exact={true}>How To Use</NavLink>
+                        </NavItem>
+                        <NavItem className="navbar-nav ml-auto">
+                            <NavLink to="/home" className="nav-link" exact={true}>Popular Teachers</NavLink>
+                        </NavItem>
 
+                        <NavItem className="navbar-nav ml-auto">
+                            <NavLink to="/about" className="nav-link" exact={true}>Popular Students</NavLink>
+                        </NavItem>
                         <NavItem className="navbar-nav ml-auto">
                             <NavLink to="/about" className="nav-link" exact={true}>About Us</NavLink>
                         </NavItem>
                         <NavItem className="navbar-nav ml-auto">
-                            <NavLink to="/home" className="nav-link" exact={true}>Home</NavLink>
+                        <NavLink to="/home" className="nav-link" exact={true}>Contact Us</NavLink>
                         </NavItem>
-
-                        <NavItem className="navbar-nav ml-auto">
-                            <NavLink to="/about" className="nav-link" exact={true}>About Us</NavLink>
-                        </NavItem>
-
-        <NavItem className="navbar-nav ml-auto">
-            <NavLink to="/home" className="nav-link" exact={true}>Home</NavLink>
-            </NavItem>
-
-            <NavItem className="navbar-nav ml-auto">
-            <NavLink to="/about" className="nav-link" exact={true}>About Us</NavLink>
-        </NavItem>
-        <NavItem className="navbar-nav ml-auto">
-            <NavLink to="/home" className="nav-link" exact={true}>Home</NavLink>
-            </NavItem>
-
-            <NavItem className="navbar-nav ml-auto">
-            <NavLink to="/about" className="nav-link" exact={true}>About Us</NavLink>
-        </NavItem>
                     </Nav>
 
                     <form className="form-inline ml-auto">
                         <input type="text" className="form-control mr-2" placeholder="Search"/>
                         <button className="btn btn-outline-success">Search</button>
                     </form>
+                <div className="small-profile-view"><img src={(this.props.isPrivate && this.props.loginUser.profilePictureUrl) ? this.props.loginUser.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"} /></div>
                     <div className="ml-auto" >
             {this.getLogInOrOutField()}
                     </div>
