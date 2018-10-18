@@ -62,7 +62,7 @@ export class Header extends React.Component {
                             <NavLink to="/about" className="nav-link" exact={true}>About Us</NavLink>
                         </NavItem>
                         <NavItem className="navbar-nav ml-auto">
-                        <NavLink to="/contact" className="nav-link" exact={true}>Contact Us</NavLink>
+                        <NavLink to="#works" className="nav-link" exact={true}>Contact Us</NavLink>
                         </NavItem>
                     </Nav>
 

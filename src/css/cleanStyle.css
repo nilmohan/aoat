@@ -169,8 +169,9 @@ h2:after {
 }
 
 .label-profile{
-    color: blue;
+    color: lightgreen;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .label-profile:hover{
@@ -311,6 +312,19 @@ h2:after {
     text-align: center;
     padding-top: 5px;
 }
-.view-profile{
+.view-profile, .login-profile{
+    color: black;
+}
+.login-profile{
+    margin: 10px 0px;
+}
+label {
+    font-size: 12px;
+    font-weight: 600;
+}
+.position-relative{
+    margin: 0px;
+}
+.section-form{
     color: black;
 }

@@ -197,7 +197,7 @@ displayPicture(event) {
 
 render() {
   return (
-      <div>
+      <div className="login-profile">
       {this.state.error && <p>{this.state.error}</p>}
     <Form>
         <Container>
@@ -205,7 +205,7 @@ render() {
             <Col sm={2}>
                     <PreviewPicture picture={this.state.picture} pictureUrl={this.state.pictureUrl}/>
                     <div>
-                        <Label for="profile_file_input" className="label-profile">Profile Picture</Label>
+                        <Label for="profile_file_input" className="label-profile">Upload Profile Picture</Label>
                         <Input id="profile_file_input"  type="file" className="form-control"onChange={(event) => {this.displayPicture(event);}} />
                     </div>
             </Col>

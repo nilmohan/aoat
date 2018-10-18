@@ -11,7 +11,7 @@ const HomePage = (props) =>
 
 
 <Row className="home-content">
-<Col xs="6" sm="2" className="home-filter-panel">
+<Col sm="2" md={{ size: 2, offset: 0 }} className="home-filter-panel">
 <div className="filter-criteria-header" > <h5>Filter Criteria</h5></div>
 <FormGroup className="filter-criteria-f-fg" check>
 <Input type="checkbox" name="students" id="students"/>
@@ -22,7 +22,7 @@ const HomePage = (props) =>
     <Label for="teachers" check>Teachers</Label>
 </FormGroup>
 </Col>
-<Col sm={{ size: 'auto' }}>
+<Col sm="10" md={{ size: 10, offset: 0 }}>
   Dashboard page content
 <CardList/></Col>
 </Row>

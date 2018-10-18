@@ -15,6 +15,7 @@ import { startSetUsers } from '../actions/users';
 import ViewProfile from '../components/ViewProfile';
 import ViewLoginProfile from '../components/ViewLoginProfile';
 import HowItWorks from '../common-components/HowItWorks';
+import AppFeedback from '../common-components/AppFeedback';
 
 export const history = createHistory();
 
@@ -37,7 +38,7 @@ const TjAppRouter = (props) => {
       </Switch>
 
     </div>
-
+      <AppFeedback/>
       <Footer/>
     </div>
   </Router>
