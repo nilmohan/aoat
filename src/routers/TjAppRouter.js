@@ -31,12 +31,13 @@ const TjAppRouter = (props) => {
         <Route path="/" component={HomePage} exact={true} />
         <Route path="/home" component={HomePage} exact={true} />
         <Route path="/profile" component={Profile} />
+        <Route path="/viewLoginProfile" component={ViewLoginProfile} />
         <Route path="/home/:id" component={ViewProfile} />
         <Route component={NotFoundPage} />
       </Switch>
 
     </div>
-      <HowItWorks />
+
       <Footer/>
     </div>
   </Router>

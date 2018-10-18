@@ -11,7 +11,7 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem, FormGroup, Input, Button } from 'reactstrap';
+    DropdownItem, FormGroup, Input, Button, Row, Col, Label } from 'reactstrap';
 import { BrowserRouter as Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 import PreviewPicture from './PreviewPicture';
 
@@ -46,7 +46,7 @@ export class Header extends React.Component {
                 <i className="fa fa-circle fa-3x custom-fa-circle">
                     <span className="logo-image">TJ</span>
                 </i>
-                <div className="app-header-name">Tuition Jugard</div>
+                <div className="app-header-name">Tuition Jugaard</div>
             </NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
 
@@ -59,17 +59,10 @@ export class Header extends React.Component {
                             <NavLink to="/about" className="nav-link" exact={true}>How To Use</NavLink>
                         </NavItem>
                         <NavItem className="navbar-nav ml-auto">
-                            <NavLink to="/home" className="nav-link" exact={true}>Popular Teachers</NavLink>
-                        </NavItem>
-
-                        <NavItem className="navbar-nav ml-auto">
-                            <NavLink to="/about" className="nav-link" exact={true}>Popular Students</NavLink>
-                        </NavItem>
-                        <NavItem className="navbar-nav ml-auto">
                             <NavLink to="/about" className="nav-link" exact={true}>About Us</NavLink>
                         </NavItem>
                         <NavItem className="navbar-nav ml-auto">
-                        <NavLink to="/home" className="nav-link" exact={true}>Contact Us</NavLink>
+                        <NavLink to="/contact" className="nav-link" exact={true}>Contact Us</NavLink>
                         </NavItem>
                     </Nav>
 
@@ -77,9 +70,13 @@ export class Header extends React.Component {
                         <input type="text" className="form-control mr-2" placeholder="Search"/>
                         <button className="btn btn-outline-success">Search</button>
                     </form>
-                <div className="small-profile-view"><img src={(this.props.isPrivate && this.props.loginUser.profilePictureUrl) ? this.props.loginUser.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"} /></div>
+                    <div className="small-profile-view">
+                        <NavLink to="/profile" >
+                            <img src={(this.props.isPrivate && this.props.loginUser.profilePictureUrl) ? this.props.loginUser.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"} />
+                        </NavLink>
+                    </div>
                     <div className="ml-auto" >
-            {this.getLogInOrOutField()}
+                        {this.getLogInOrOutField()}
                     </div>
                 </Collapse>
 

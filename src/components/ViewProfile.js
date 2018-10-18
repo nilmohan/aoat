@@ -69,6 +69,12 @@ export class ViewProfile extends React.Component {
                                     <div>I am available for demo classes </div>
                                 </ListGroupItemText>
                             </ListGroupItem>
+                            <ListGroupItem >
+                                <ListGroupItemText>
+                                    <div>I am charging of 1000 rupees per course </div>
+                                    <div>Price is slightly negotiable</div>
+                                </ListGroupItemText>
+                            </ListGroupItem>
                         </ListGroup>
                     </Col>
                 </Row>

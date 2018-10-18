@@ -3,6 +3,8 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Row
 import { connect } from 'react-redux';
 import {startEditUser} from '../actions/loginUser';
 import PreviewPicture from './PreviewPicture';
+import AppRouter, { history } from '../routers/AppRouter';
+
 
 export class ViewLoginProfile extends React.Component {
   constructor(props) {
@@ -60,11 +62,15 @@ displayPicture(event) {
     });
   };
   reader.readAsDataURL(file);
-}
+};
+onSubmit = (e) => {
+    e.preventDefault();
+    history.push('/profile/edit');
+};
 
 render() {
   return (
-      <Form>
+      <Form onSubmit={this.onSubmit}>
       <Row form>
         <Col sm={2}>
             <PreviewPicture picture={this.state.picture} pictureUrl={this.state.pictureUrl}/>

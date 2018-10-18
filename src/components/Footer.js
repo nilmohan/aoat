@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 
 export class Footer extends React.Component {
   constructor(props) {
@@ -8,32 +9,28 @@ export class Footer extends React.Component {
   render() {
     return (
         <footer>
-        <div className="container">
-        <div className="row">
-          <div className="col">
-          <ul className="footer-nav">
-          <li><a href="#">About us</a></li>
-      <li><a href="#">Blog</a></li>
-          <li><a href="#">Press</a></li>
-          <li><a href="#">iOS App</a></li>
-      <li><a href="#">Android App</a></li>
-      </ul>
-      </div>
-      <div className="col">
-          <ul className="social-links">
-          <li><a href="#"><i className="fa fa-facebook-square"></i></a></li>
-          <li><a href="#"><i className="fa fa-twitter-square"></i></a></li>
-          <li><a href="#"><i className="fa fa-google-plus-square"></i></a></li>
-          <li><a href="#"><i className="fa fa-instagram"></i></a></li>
-          </ul>
-          </div>
-          </div>
-              </div>
-          <div className="row">
-          <p>
-          Copyright &copy; 2015 by Omnifood. All rights reserved.
-      </p>
-      </div>
+          <Row>
+              <Col sm={{ size: 5, offset: 1 }}>
+                <ul className="footer-nav">
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">iOS App</a></li>
+                    <li><a href="#">Android App</a></li>
+                </ul>
+              </Col>
+              <Col sm={{ size: 5, offset: 1 }}>
+                <ul className="social-links">
+                    <li><a href="#"><i className="fa fa-facebook-square"></i></a></li>
+                    <li><a href="#"><i className="fa fa-twitter-square"></i></a></li>
+                    <li><a href="#"><i className="fa fa-google-plus-square"></i></a></li>
+                    <li><a href="#"><i className="fa fa-instagram"></i></a></li>
+                </ul>
+              </Col>
+          </Row>
+          <Row>
+              <Col sm="12" md={{ size: 6, offset: 5 }}>Copyright &copy; 2015 by Omnifood. All rights reserved.</Col>
+          </Row>
       </footer>
     );
   }
