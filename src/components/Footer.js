@@ -29,7 +29,7 @@ export class Footer extends React.Component {
               </Col>
           </Row>
           <Row>
-              <Col sm="12" md={{ size: 6, offset: 5 }}>Copyright &copy; 2015 by Omnifood. All rights reserved.</Col>
+              <Col sm="12" md={{ size: 6, offset: 5 }}>Copyright &copy; 2015 by TuitionJugaard. All rights reserved.</Col>
           </Row>
       </footer>
     );
