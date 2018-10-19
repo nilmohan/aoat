@@ -2,15 +2,22 @@ import React from 'react';
 import UserList from './UserList';
 import CardItem from './CardItem';
 import CardList from './CardList';
-import { Container, Row, Col, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Row, Col, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import { setFilterAll, setFilterByStudent, setFilterByTeacher, sortByDate, sortByAmount } from '../actions/filters';
 import { connect } from 'react-redux';
 import selectUsers from '../selectors/users';
+import {states} from '../Helpers/State';
 
 class HomePage extends React.Component
 {
     constructor(props) {
         super(props);
+
+        this.state= {
+            selectedState:{
+            },
+            districts: []
+        }
 
     };
     onFilterTypeChange = (e) =>{
@@ -27,6 +34,15 @@ class HomePage extends React.Component
 
 
     };
+onStateChange =(event)=>{
+    const myState = states.filter((state) => {return state.key === event.target.value});
+    this.setState({selectedState: event.target.value,
+        districts: myState[0].districts
+    });
+}
+onDistrictChange =(event)=>{
+    this.setState({selectedDistrict: event.target.value});
+}
 
     render(){
         return (
@@ -48,6 +64,22 @@ class HomePage extends React.Component
         <Input type="checkbox" name="teachers" id="teachers" value="teacher" checked={this.props.filters.byTeacher} onChange={this.onFilterTypeChange}/>
             <Label for="teachers" check>Teachers</Label>
         </FormGroup>
+    <FormGroup>
+    <Label for="stateSelect">Select State</Label>
+    <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedState}>
+        <option value="Select State">Select State</option>
+        {states.map((state, i) => <option value={state.key} key={i}>{state.name}</option>)}
+    </CustomInput>
+    </FormGroup>
+
+    <FormGroup>
+    <Label for="districtSelect">Select District</Label>
+    <CustomInput type="select" id="districtSelect" name="districtSelect">
+        <option value="select">Select</option>
+        {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
+    </CustomInput>
+    </FormGroup>
+
         </Col>
         <Col sm="10" md={{ size: 10, offset: 0 }}>
         Dashboard page content
