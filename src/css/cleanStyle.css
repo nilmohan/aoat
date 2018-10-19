@@ -86,6 +86,7 @@ body{
 }
 .my-card-style{
     width: 13rem!important;
+    margin-bottom: 10px;
 }
 
 /*.card-header:first-child {*/
@@ -327,4 +328,24 @@ label {
 }
 .section-form{
     color: black;
+}
+
+.pagination-parent{
+    color: black;
+}
+
+
+
+
+.pagination-wrapper {
+    overflow-x:auto;
+}
+
+.pagination {
+    justify-content: center;
+    margin:30px;
+}
+
+.data-slice {
+    margin-top: 15px;
 }
