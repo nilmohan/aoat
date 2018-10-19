@@ -29,7 +29,7 @@ export class ViewProfile extends React.Component {
                     <Col xs="3" className="text-center">
                         <img className="img-fluid mb-2 mt-2" src={this.props.user.profilePictureUrl ? this.props.user.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"}/>
                         <div> {this.props.user.name}</div>
-                        <div> {this.props.user.userType === 't' ? "(Teacher)" : "(Student)"}</div>
+                        <div> {this.props.user.userType == 't' ? "(Teacher)" : "(Student)"}</div>
                         <Rating emptySymbol="fa fa-star-o fa-1x"
                             fullSymbol="fa fa-star fa-1x"
                             fractions={2} className="rating-color"

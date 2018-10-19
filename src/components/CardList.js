@@ -3,6 +3,8 @@ import { Card, Button, CardImg, CardTitle, CardText, CardGroup,
     CardSubtitle, CardBody, Container, Row, Col, CardDeck, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import CardItem from './CardItem';
 import { connect } from 'react-redux';
+import selectUsers from '../selectors/users';
+
 
 class CardList extends React.Component {
 
@@ -10,7 +12,7 @@ class CardList extends React.Component {
 
         super(props);
 
-        this.pageSize = 5;
+        this.pageSize = 10;
         this.pagesCount = Math.ceil(this.props.users.length / this.pageSize);
 
         this.state = {
@@ -31,6 +33,7 @@ class CardList extends React.Component {
 
     render()  {
         const { currentPage } = this.state;
+        this.pagesCount = Math.ceil(this.props.users.length / this.pageSize);
         return (
                 <div>
             <CardDeck className="mx-3">
@@ -67,10 +70,13 @@ class CardList extends React.Component {
 
 }
 
+
+
 const mapStateToProps = (state) => {
     return {
-        users: state.users
+        users: selectUsers(state.users, state.filters)
     };
 };
+
 
 export default connect(mapStateToProps)(CardList);

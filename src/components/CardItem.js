@@ -26,11 +26,11 @@ export class CardItem extends React.Component{
         };
         return (
             <div style={pStyle} className="my-card-style">
-                <NavLink to={`/home/${this.props.user.id}`}  user = {this.props.user}>
+                <NavLink to={`/home/${this.props.user.id}`}>
                     <Card>
                         <CardHeader className="card-header">
                             <div className="card-header-child">
-                                <i className="fa fa-circle fa-1x card-custom-fa-circle"><span className="card-logo-image">T</span></i>
+                                <i className="fa fa-circle fa-1x card-custom-fa-circle"><span className="card-logo-image">{this.props.user.userType == 't' ? "T" : "S"}</span></i>
                                 <span className="card-header-name">{this.state.name.toUpperCase()}</span><br></br>
                                 <Rating className="rating-class" emptySymbol="fa fa-star-o fa-1x" fullSymbol="fa fa-star fa-1x" fractions={2} initialRating={2.5} readonly />
 
