@@ -19,7 +19,13 @@ export class CardItem extends React.Component{
             error: ''
         };
     }
-
+    averageRating(){
+        let averageRating = 0;
+        if(this.props.user.ratingList != null && this.props.user.ratingList.length > 0){
+            averageRating = this.props.user.ratingList.map(item => parseFloat(item.rating)).reduce((prev, next) => prev + next)/this.props.user.ratingList.length;
+        }
+        return averageRating;
+    }
     render() {
         const pStyle = {
             width: "18rem"
@@ -32,7 +38,8 @@ export class CardItem extends React.Component{
                             <div className="card-header-child">
                                 <i className="fa fa-circle fa-1x card-custom-fa-circle"><span className="card-logo-image">{this.props.user.userType == 't' ? "T" : "S"}</span></i>
                                 <span className="card-header-name">{this.state.name.toUpperCase()}</span><br></br>
-                                <Rating className="rating-class" emptySymbol="fa fa-star-o fa-1x" fullSymbol="fa fa-star fa-1x" fractions={2} initialRating={2.5} readonly />
+                                <Rating className="rating-class" emptySymbol="fa fa-star-o fa-1x" fullSymbol="fa fa-star fa-1x" fractions={2} initialRating={this.averageRating()} readonly />
+                                <span className="rating-count-class">({this.props.user.ratingList.length})</span>
 
                             </div>
                         </CardHeader>

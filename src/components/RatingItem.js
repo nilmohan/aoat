@@ -9,8 +9,8 @@ const RatingItem = ({rating, description, ratedBy, addedOn }) => (
                 fullSymbol="fa fa-star fa-1x"
                 fractions={2} className="rating-color"
                 initialRating={parseFloat(rating)} readonly/>
-        <p> By <span className="rated-by"> {ratedBy } </span> On {addedOn ? moment(addedOn).format('Do MMMM  YYYY') : ''} </p>
-        <p> {description } </p>
+        <div> By <span className="rated-by"> {ratedBy } </span> On {addedOn ? moment(addedOn).format('Do MMMM  YYYY') : ''} </div>
+        <div>Descirption : {description } </div>
         <hr className = "my-2" />
     </div>
 );
