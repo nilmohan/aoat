@@ -240,3 +240,10 @@ class TjPagination extends React.Component {
 }
 
 export default TjPagination ;
+
+
+
+<form className="form-inline ml-auto">
+                        <input type="text" className="form-control mr-2" placeholder="Search"/>
+                        <button className="btn btn-outline-success">Search</button>
+                    </form>

@@ -3,7 +3,9 @@
 const filtersReducerDefaultState = {
   all: true,
   byStudent: false,
-  byTeacher: false
+  byTeacher: false,
+  byState: '',
+  byDistrict: ''
 
 };
 
@@ -29,6 +31,18 @@ export default (state = filtersReducerDefaultState, action) => {
           byTeacher: action.byTeacher,
           all: (!action.byTeacher && !state.byStudent)
     };
+case 'SET_FILTER_BY_STATE':
+  return {
+      ...state,
+      byState: action.byState,
+      all: false
+};
+case 'SET_FILTER_BY_DISTRICT':
+  return {
+      ...state,
+      byDistrict: action.byDistrict,
+      all: false
+};
     case 'SET_TEXT_FILTER':
       return {
           ...state,

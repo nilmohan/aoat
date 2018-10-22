@@ -23,18 +23,34 @@ export class ViewProfile extends React.Component {
 
     render()
     {
+        const address = this.props.user.address;
         return (
             <Container className="view-profile">
                 <Row>
-                    <Col xs="3" className="text-center">
+                    <Col xs="3">
                         <img className="img-fluid mb-2 mt-2" src={this.props.user.profilePictureUrl ? this.props.user.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"}/>
-                        <div> {this.props.user.name}</div>
-                        <div> {this.props.user.userType == 't' ? "(Teacher)" : "(Student)"}</div>
-                        <Rating emptySymbol="fa fa-star-o fa-1x"
-                            fullSymbol="fa fa-star fa-1x"
-                            fractions={2} className="rating-color"
-                            initialRating= {this.averageRating()} readonly/>
-                        <div> Address : #20 Flat No101, Marathali Banglore Karnataka</div>
+
+                        <div className="text-center">
+                            <div> {this.props.user.name}</div>
+                            <div> {this.props.user.userType == 't' ? "(Teacher)" : "(Student)"}</div>
+                            <Rating emptySymbol="fa fa-star-o fa-1x"
+                                fullSymbol="fa fa-star fa-1x"
+                                fractions={2} className="rating-color"
+                                initialRating= {this.averageRating()} readonly/>
+                                ({this.props.user.ratingList.length})
+                        </div>
+                        <FormGroup hidden={!this.props.isAuthenticated}>
+                            <Label>Email</Label> {' :  '}
+                            <Label><p>{this.props.user.email}</p></Label>
+                        </FormGroup>
+                        <FormGroup hidden={!this.props.isAuthenticated}>
+                            <Label>Moblie</Label> {' :  '}
+                            <Label><p>{this.props.user.mobileNo}</p></Label>
+                        </FormGroup>
+                        <FormGroup hidden={!this.props.isAuthenticated}>
+                            <Label>Address</Label> {' :  '}
+                            <Label><p>{address.address1} {address.address2} {address.district} {address.state} {address.zip}</p></Label>
+                        </FormGroup>
                     </Col>
                     <Col xs="9">
                         <h4>About </h4>

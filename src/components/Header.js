@@ -66,12 +66,8 @@ export class Header extends React.Component {
                         </NavItem>
                     </Nav>
 
-                    <form className="form-inline ml-auto">
-                        <input type="text" className="form-control mr-2" placeholder="Search"/>
-                        <button className="btn btn-outline-success">Search</button>
-                    </form>
                     <div className="small-profile-view">
-                        <NavLink to="/profile" >
+                        <NavLink to="/profile" hidden={!this.props.isAuthenticated}>
                             <img src={(this.props.isPrivate && this.props.loginUser.profilePictureUrl) ? this.props.loginUser.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"} />
                         </NavLink>
                     </div>
@@ -93,7 +89,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        loginUser: state.loginUser
+        loginUser: state.loginUser,
+        isAuthenticated: !!state.auth.uid
     };
 };
 

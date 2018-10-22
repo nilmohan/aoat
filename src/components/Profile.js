@@ -1,9 +1,10 @@
 import React from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Row, Container } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Row, Container, CustomInput } from 'reactstrap';
 import { connect } from 'react-redux';
 import {startEditUser} from '../actions/loginUser';
 import PreviewPicture from './PreviewPicture';
 import moment from 'moment';
+import {states} from '../Helpers/State';
 
 
 export class Profile extends React.Component {
@@ -16,7 +17,7 @@ export class Profile extends React.Component {
       name: props.loginUser ? props.loginUser.name : '',
       mobileNo: props.loginUser ? props.loginUser.mobileNo : '',
       userType: props.loginUser ? props.loginUser.userType : '',
-
+      gender: props.loginUser ? props.loginUser.gender : '',
 
       subjects: myProfile.subjects,
       classes: myProfile.classes,
@@ -26,22 +27,23 @@ export class Profile extends React.Component {
       tuitionType: myProfile.tuitionType,
       contactType: myProfile.contactType,
       availableFordemo: myProfile.availableFordemo,
-        updatedDate: myProfile.updatedDate,
         urgentRequirement: myProfile.urgentRequirement,
         paymentInfo: myProfile.paymentInfo,
         otherInfo: myProfile.otherInfo,
 
         address1 : address.address1,
         address2 : address.address2,
-        district : address.district,
-        state : address.state,
+        selectedDistrict : address.district,
+        selectedState : address.state,
         zip : address.zip,
 
       calendarFocused: false,
       error: '',
 
       picture: '',
-      pictureUrl: (props.loginUser && props.loginUser.profilePictureUrl) ? props.loginUser.profilePictureUrl : null
+      pictureUrl: (props.loginUser && props.loginUser.profilePictureUrl) ? props.loginUser.profilePictureUrl : null,
+        selectedState:{},
+        districts: []
     };
   }
   onNameChange = (e) => {
@@ -57,26 +59,26 @@ onSave = () =>{
   console.log('save called '+ this.state.userType);
 
     const profile = {
-        subjects : this.state.subjects,
-        classes: this.state.classes,
-        experience: this.state.experience,
-        locality: this.state.locality,
-        isFeeNegotiable : this.state.isFeeNegotiable,
-        tuitionType: this.state.tuitionType,
-        contactType: this.state.contactType,
-        availableFordemo: this.state.availableFordemo,
+        subjects : this.state.subjects? this.state.subjects :'',
+        classes: this.state.classes? this.state.classes : '',
+        experience: this.state.experience? this.state.experience : '',
+        locality: this.state.locality? this.state.experience : '',
+        isFeeNegotiable : this.state.isFeeNegotiable? this.state.isFeeNegotiable : '',
+        tuitionType: this.state.tuitionType? this.state.tuitionType: '',
+        contactType: this.state.contactType? this.state.contactType : '',
+        availableFordemo: this.state.availableFordemo ? this.state.availableFordemo : '',
         updatedDate: new Date(),
-        urgentRequirement: this.state.urgentRequirement,
-        paymentInfo: this.state.paymentInfo,
-        otherInfo: this.state.otherInfo
+        urgentRequirement: this.state.urgentRequirement? this.state.urgentRequirement: '',
+        paymentInfo: this.state.paymentInfo? this.state.paymentInfo : '',
+        otherInfo: this.state.otherInfo? this.state.otherInfo :''
     };
 
     const address = {
-        address1 : this.state.address1,
-        address2 : this.state.address2,
-        district : this.state.district,
-        state : this.state.state,
-        zip : this.state.zip
+        address1 : this.state.address1?this.state.address1 :'',
+        address2 : this.state.address2? this.state.address2 :'',
+        district : this.state.selectedDistrict? this.state.selectedDistrict : '',
+        state : this.state.selectedState? this.state.selectedState : '',
+        zip : this.state.zip? this.state.zip:''
     }
 
 
@@ -84,12 +86,16 @@ onSave = () =>{
     name: this.props.loginUser.name,
     email: this.props.loginUser.email,
     userType: this.state.userType,
+    gender: this.state.gender,
     mobileNo: this.state.mobileNo,
     profilePicture: this.state.picture,
     profile: profile,
     address: address});
 }
-
+onGenderChange = (e) => {
+    const gender = e.target.value;
+    this.setState(() => ({ gender }));
+};
 onUserTypeChange = (e) => {
   const userType = e.target.value;
   this.setState(() => ({ userType }));
@@ -157,15 +163,17 @@ onAddress2Change = (e) =>{
     this.setState(() => ({ address2 }));
 };
 
-onStateChange = (e) =>{
-    const state = e.target.value;
-    this.setState(() => ({ state }));
-};
+onStateChange =(event)=>{
+    const myState = states.filter((state) => {return state.key === event.target.value});
+    this.setState({selectedState: myState[0].key,
+        districts: myState[0].districts
+    });
 
-onDistrictChange = (e) =>{
-    const district = e.target.value;
-    this.setState(() => ({ district }));
-};
+
+}
+onDistrictChange =(event)=>{
+    this.setState({selectedDistrict: event.target.value});
+}
 
 onZipChange = (e) =>{
     const zip = e.target.value;
@@ -196,6 +204,7 @@ displayPicture(event) {
 };
 
 render() {
+    const updatedDate = this.props.loginUser.updatedDate;
   return (
       <div className="login-profile">
       {this.state.error && <p>{this.state.error}</p>}
@@ -212,24 +221,35 @@ render() {
             <Col md={6}>
                 <FormGroup>
                     <Label>Last Updated </Label> {' :  '}
-                    <Label>{moment(this.state.updatedDate).format('Do MMMM  YYYY, h:mm:ss a')}</Label>
+                    <Label><p>{moment(updatedDate).format('Do MMMM  YYYY, h:mm:ss a')}</p></Label>
                 </FormGroup>
                 <FormGroup>
                     <Label>Name</Label> {' :  '}
-                    <Label>{this.state.name}</Label>
+                    <Label><p>{this.state.name}</p></Label>
                 </FormGroup>
+    <FormGroup>
+    <Label>Gender</Label> {' :  '}
+
+    <FormGroup check inline>
+    <Label check > <Input type="radio" value="m" name={this.state.gender}  onChange={this.onGenderChange} checked={this.state.gender === "m"} disabled={this.props.loginUser.gender != null}/>{' '} <p>Male</p> </Label>
+    </FormGroup>
+    <FormGroup check inline className="fg-margin">
+        <Label check> <Input type="radio" value="f" name={this.state.gender} onChange={this.onGenderChange} checked={this.state.gender === "f"} disabled={this.props.loginUser.gender != null} />{' '}<p>{ '  '} Female</p></Label>
+    </FormGroup>
+    </FormGroup>
                 <FormGroup>
                     <Label>User Type</Label> {' :  '}
+
                     <FormGroup check inline>
-                    <Label check> <Input type="radio" value="s" name={this.state.userType}  onChange={this.onUserTypeChange} checked={this.state.userType === "s"}/>{' '} Student </Label>
+                    <Label check > <Input type="radio" value="s" name={this.state.userType}  onChange={this.onUserTypeChange} checked={this.state.userType === "s"} disabled={this.props.loginUser.userType != null}/>{' '} <p>Student</p> </Label>
                     </FormGroup>
-                    <FormGroup check inline>
-                    <Label check> <Input type="radio" value="t" name={this.state.userType} onChange={this.onUserTypeChange} checked={this.state.userType === "t"} />{' '} Teacher</Label>
+                    <FormGroup check inline className="fg-margin">
+                    <Label check> <Input type="radio" value="t" name={this.state.userType} onChange={this.onUserTypeChange} checked={this.state.userType === "t"} disabled={this.props.loginUser.userType != null} />{' '}<p>{ '  '} Teacher</p></Label>
                     </FormGroup>
                 </FormGroup>
                 <FormGroup>
                     <Label>Email Id</Label> {' :  '}
-                    <Label>{this.props.loginUser.email}</Label>
+                    <Label><p>{this.props.loginUser.email}</p></Label>
                 </FormGroup>
                 <FormGroup>
                     <Label for="mobileNo">Mobile No</Label>{' :  '}
@@ -239,71 +259,69 @@ render() {
             <Col sm={3}>
             </Col>
             </Row>
-            <Row form>
-                <Col md={12}>
-                    <FormGroup>
-                        <Label >Prefered Subjects</Label>{' :  '}
-                        <Input type="textarea" onChange={this.onSubjectsChange} value={this.state.subjects}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label >Prefered Classes</Label>{' :  '}
-                        <Input type="textarea" onChange={this.onClassesChange} value={this.state.classes}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label >Experience</Label>{' :  '}
-                        <Input type="textarea" onChange={this.onExperienceChange} value={this.state.experience}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label >Prefered Area</Label>{' :  '}
-                        <Input type="textarea" onChange={this.onLocalityChange} value={this.state.locality}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label >Payment Info</Label>{' :  '}
-                        <Input type="textarea" onChange={this.onPaymentInfoChange} value={this.state.paymentInfo}/>
-                        <FormFeedback>I will charge Rs 2000/- per subject.</FormFeedback>
-                    </FormGroup>
-                    <FormGroup>
-                    <FormGroup check>
-                        <Input type="checkbox" name="check" id="isFeeNegotiable" onChange={this.onFeeNegotiableChange} checked={this.state.isFeeNegotiable}/>
-                        <Label for="isFeeNegotiable" check>Course fee is negotiable</Label>
-                    </FormGroup>
-                        <Label >Others</Label>{' :  '}
-                        <Input type="textarea" onChange={this.onOtherInfoChange} value={this.state.otherInfo}/>
-                    </FormGroup>
-                    <FormGroup >
-                        <Label>Prefered class type </Label> {' :  '}
-                        <FormGroup check inline>
-                        <Label check> <Input type="radio" value="individual" checked={this.state.tuitionType === "individual"} onChange={this.onTuitionTypeChange}  />{' '} Individual </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                        <Label check> <Input type="radio" value="group"checked={this.state.tuitionType === "group"} onChange={this.onTuitionTypeChange} />{' '} Group</Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                        <Label check> <Input type="radio" value="both" checked={this.state.tuitionType === "both"} onChange={this.onTuitionTypeChange} />{' '} Both</Label>
-                        </FormGroup>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Contact Medium </Label> {' :  '}
-                        <FormGroup check inline>
-                        <Label check> <Input type="radio" value="mobile" checked={this.state.contactType === "both"} onChange={this.onContactTypeChange} />{' '} By Mobile </Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                        <Label check> <Input type="radio" value="email" checked={this.state.contactType === "email"} onChange={this.onContactTypeChange}  />{' '} By Email</Label>
-                        </FormGroup>
-                        <FormGroup check inline>
-                        <Label check> <Input type="radio" value="both" checked={this.state.contactType === "both"} onChange={this.onContactTypeChange}  />{' '} Both</Label>
-                        </FormGroup>
-                    </FormGroup>
-                    <FormGroup check>
-                    <Input type="checkbox" name="availableFordemo" id="availableFordemo" checked={this.state.availableFordemo} onChange={this.onAvailableFordemoChange}/>
-                        <Label for="availableFordemo" check>I am avalable for demo upto 5 classes.</Label>
-                    </FormGroup>
-                    <FormGroup check>
-                        <Input type="checkbox" name="urgentRequirement" id="urgentRequirement" checked={this.state.urgentRequirement} onChange={this.onUrgentRequirementChange}/>
-                        <Label for="urgentRequirement" check>Is it urgent requirement?</Label>
-                    </FormGroup>
-                </Col>
-            </Row>
+        <FormGroup>
+        <Label >Prefered Subjects</Label>{' :  '}
+    <Input type="textarea" onChange={this.onSubjectsChange} value={this.state.subjects}/>
+</FormGroup >
+    <FormGroup >
+    <Label >Prefered Classes</Label>{' :  '}
+    <Input type="textarea" onChange={this.onClassesChange} value={this.state.classes}/>
+</FormGroup>
+    <FormGroup hidden={this.state.userType == '' | this.state.userType == 's'} >
+    <Label >Experience</Label>{' :  '}
+    <Input type="textarea" onChange={this.onExperienceChange} value={this.state.experience}/>
+</FormGroup>
+    <FormGroup hidden={this.state.userType == '' | this.state.userType == 't'} >
+<Label >School Or College Information</Label>{' :  '}
+    <Input type="textarea" />
+</FormGroup>
+    <FormGroup>
+    <Label >Prefered Locality for Tuituon</Label>{' :  '}
+                                  <Input type="textarea" onChange={this.onLocalityChange} value={this.state.locality}/>
+</FormGroup>
+    <FormGroup hidden={this.state.userType == '' | this.state.userType == 's'}>
+    <Label >Payment Info</Label>{' :  '}
+    <Input type="textarea" onChange={this.onPaymentInfoChange} value={this.state.paymentInfo}/>
+<FormFeedback>I will charge Rs 2000/- per subject.</FormFeedback>
+    </FormGroup>
+    <FormGroup check hidden={this.state.userType == '' | this.state.userType == 's'}>
+<Input type="checkbox" name="check" id="isFeeNegotiable" onChange={this.onFeeNegotiableChange} checked={this.state.isFeeNegotiable}/>
+<Label for="isFeeNegotiable" check><p>Course fee is negotiable</p></Label>
+    </FormGroup>
+    <FormGroup >
+    <Label>Prefered class type </Label> {' :  '}
+    <FormGroup check inline>
+    <Label check> <Input type="radio" value="individual" checked={this.state.tuitionType === "individual"} onChange={this.onTuitionTypeChange}  />{' '} <p>Individual</p> </Label>
+    </FormGroup>
+    <FormGroup className="fg-margin" check inline>
+    <Label check> <Input type="radio" value="group"checked={this.state.tuitionType === "group"} onChange={this.onTuitionTypeChange} />{' '} <p>Group</p></Label>
+    </FormGroup>
+    <FormGroup className="fg-margin" check inline>
+    <Label check> <Input type="radio" value="both" checked={this.state.tuitionType === "both"} onChange={this.onTuitionTypeChange} />{' '} <p>Both</p></Label>
+    </FormGroup>
+    </FormGroup>
+
+    <FormGroup>
+    <Label>Contact Medium </Label> {' :  '}
+    <FormGroup check inline>
+    <Label check> <Input type="radio" value="mobile" checked={this.state.contactType === "mobile"} onChange={this.onContactTypeChange} />{' '} <p>By Mobile</p> </Label>
+    </FormGroup>
+    <FormGroup className="fg-margin" check inline>
+    <Label check> <Input type="radio" value="email" checked={this.state.contactType === "email"} onChange={this.onContactTypeChange}  />{' '} <p>By Email</p></Label>
+    </FormGroup>
+    <FormGroup className="fg-margin" check inline>
+    <Label check> <Input type="radio" value="both" checked={this.state.contactType === "both"} onChange={this.onContactTypeChange}  />{' '} <p>By Mobile/Email</p></Label>
+    </FormGroup>
+    </FormGroup>
+    <FormGroup check hidden={this.state.userType == '' | this.state.userType == 's'}>
+    <Input type="checkbox" name="availableFordemo" id="availableFordemo" checked={this.state.availableFordemo} onChange={this.onAvailableFordemoChange}/>
+<Label for="availableFordemo" check><p>I am avalable for demo upto 5 classes.</p></Label>
+    </FormGroup>
+
+            <FormGroup>
+                <Label >Other Information</Label>{' :  '}
+                <Input type="textarea" onChange={this.onOtherInfoChange} value={this.state.otherInfo}/>
+            </FormGroup>
             <FormGroup>
                 <Label for="exampleAddress">Address</Label>
                 <Input type="text" name="address" id="exampleAddress" placeholder="1234 Main St" value={this.state.address1}  onChange={this.onAddress1Change}/>
@@ -314,16 +332,22 @@ render() {
             </FormGroup>
             <Row form>
                 <Col md={6}>
-                <FormGroup>
-                <Label for="exampleCity">District</Label>
-                <Input type="text" name="city" id="exampleCity" value={this.state.district}  onChange={this.onDistrictChange}/>
-                </FormGroup>
+                    <FormGroup>
+                        <Label for="stateSelect">State</Label>
+                        <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedState}>
+                        <option value="Select State">Select State</option>
+                            {states.map((item, i) => <option value= {item.key} key={i}>{item.name}</option>)}
+                        </CustomInput>
+                    </FormGroup>
                 </Col>
                 <Col md={4}>
-                <FormGroup>
-                <Label for="exampleState">State</Label>
-                <Input type="text" name="state" id="exampleState" value={this.state.state}  onChange={this.onStateChange}/>
-                </FormGroup>
+                    <FormGroup>
+                        <Label for="districtSelect">District</Label>
+                        <CustomInput type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedDistrict}>
+                            <option value="select">Select</option>
+                            {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
+                        </CustomInput>
+                    </FormGroup>
                 </Col>
                 <Col md={2}>
                 <FormGroup>
@@ -332,7 +356,16 @@ render() {
                 </FormGroup>
                 </Col>
             </Row>
-            <FormGroup check row>
+
+    <FormGroup check hidden={this.state.userType == '' | this.state.userType == 't'}>
+    <Input type="checkbox" name="urgentRequirement" id="urgentRequirement" checked={this.state.urgentRequirement} onChange={this.onUrgentRequirementChange}/>
+<Label for="urgentRequirement" check><p>I need a teacher urgently for all of my subjects.</p></Label>
+    </FormGroup>
+    <FormGroup check>
+    <Input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
+<Label for="termsAndConditions" check><p>I filled all abouve informations correctly and having all related documents for further verification.</p></Label>
+    </FormGroup>
+            <FormGroup className="profile-button-group" check row>
                 <Col sm={{ size: 10, offset: 4 }}>
                     <Button color="primary" size="sm" onClick={() => this.onSave()} >Save</Button>{' '}
                     <Button color="secondary" size="sm">Edit</Button>

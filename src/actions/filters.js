@@ -19,3 +19,12 @@ export const setFilterAll = (all = false) => ({
   all
 });
 
+export const setFilterByState = (byState = '') => ({
+  type: 'SET_FILTER_BY_STATE',
+  byState
+});
+
+export const setFilterByDistrict = (byDistrict = '') => ({
+  type: 'SET_FILTER_BY_DISTRICT',
+  byDistrict
+});

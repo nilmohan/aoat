@@ -3,7 +3,7 @@ import UserList from './UserList';
 import CardItem from './CardItem';
 import CardList from './CardList';
 import { Container, Row, Col, FormGroup, Label, Input, CustomInput } from 'reactstrap';
-import { setFilterAll, setFilterByStudent, setFilterByTeacher, sortByDate, sortByAmount } from '../actions/filters';
+import { setFilterAll, setFilterByStudent, setFilterByTeacher, setFilterByState, setFilterByDistrict } from '../actions/filters';
 import { connect } from 'react-redux';
 import selectUsers from '../selectors/users';
 import {states} from '../Helpers/State';
@@ -39,9 +39,13 @@ onStateChange =(event)=>{
     this.setState({selectedState: event.target.value,
         districts: myState[0].districts
     });
+
+    this.props.dispatch(setFilterByState(event.target.value));
 }
 onDistrictChange =(event)=>{
     this.setState({selectedDistrict: event.target.value});
+
+    this.props.dispatch(setFilterByDistrict(event.target.value));
 }
 
     render(){
@@ -66,7 +70,7 @@ onDistrictChange =(event)=>{
         </FormGroup>
     <FormGroup>
     <Label for="stateSelect">Select State</Label>
-    <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedState}>
+    <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedDistrict}>
         <option value="Select State">Select State</option>
         {states.map((state, i) => <option value={state.key} key={i}>{state.name}</option>)}
     </CustomInput>
@@ -74,7 +78,7 @@ onDistrictChange =(event)=>{
 
     <FormGroup>
     <Label for="districtSelect">Select District</Label>
-    <CustomInput type="select" id="districtSelect" name="districtSelect">
+    <CustomInput type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedState}>
         <option value="select">Select</option>
         {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
     </CustomInput>

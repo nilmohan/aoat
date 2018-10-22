@@ -138,7 +138,7 @@ h2 {
 
 h1, h2, h3 {
     font-weight: 300;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 h2:after {
@@ -267,25 +267,6 @@ footer {
     color: #517fa4;
 }
 
-
-h2 {
-    font-size: 180%;
-    word-spacing: 2px;
-    text-align: center;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-h2:after {
-    display: block;
-    height: 2px;
-    background-color: #e67e22;
-    content: " ";
-    width: 100px;
-    margin: 0 auto;
-    margin-top: 30px;
-}
-
 .works-step div {
     color: #e67e22;
     font-size: 150%;
@@ -299,10 +280,7 @@ h2:after {
     float: left;
     padding: 5px;
 }
-.label{
-    font-size: small;
-    font-weight: 600;
-}
+
 
 .filter-criteria-header{
     background-color: #343a40;
@@ -319,10 +297,7 @@ h2:after {
 .login-profile{
     margin: 10px 0px;
 }
-label {
-    font-size: 12px;
-    font-weight: 600;
-}
+
 .position-relative{
     margin: 0px;
 }
@@ -347,5 +322,31 @@ label {
 }
 
 .data-slice {
+    margin-top: 15px;
+}
+
+.about-us{
+    color: black;
+}
+
+h5, label{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+p {
+    font-size:small;
+    font-weight: normal;
+    margin-bottom: 1rem;
+    display: inline;
+}
+.rated-by{
+    font-weight: 600;
+}
+.fg-margin{
+    margin-left: 15px;
+}
+
+.profile-button-group{
     margin-top: 15px;
 }
