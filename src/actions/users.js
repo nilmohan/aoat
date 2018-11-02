@@ -38,6 +38,7 @@ export const startSetUsers = () => {
 
     dispatch(setUsers(userList));
   });
+
   };
 };
 
@@ -55,3 +56,22 @@ export const startUpdateForUser = (id, updates) => {
   });
   };
 };
+
+// SYNC_USERS
+export const syncUsers = (users) => ({
+  type: 'SYNC_USERS',
+  users
+});
+
+export const listenToConfigChanges = () => {
+  return (dispatch, getState) => {
+    database.ref('users').on('child_changed', (snapshot) => {
+      console.log(snapshot.key, snapshot.val());
+      dispatch( syncUsers(snapshot.val()));
+
+    }, (e) =>{
+      console.log("Error with data fetching", e);
+    });
+  };
+}
+

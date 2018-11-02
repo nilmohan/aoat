@@ -11,7 +11,7 @@ import PublicProfile from '../components/PublicProfile';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AppBreadcrumb from '../components/AppBreadcrumb';
-import { startSetUsers } from '../actions/users';
+import { startSetUsers, listenToConfigChanges } from '../actions/users';
 import ViewProfile from '../components/ViewProfile';
 import ViewLoginProfile from '../components/ViewLoginProfile';
 import HowItWorks from '../common-components/HowItWorks';
@@ -22,6 +22,7 @@ export const history = createHistory();
 const TjAppRouter = (props) => {
 
   props.startSetUsers();
+  props.listenToConfigChanges();
   return (
   <Router history={history}>
     <div>
@@ -49,6 +50,7 @@ const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.uid
 });
 const mapDispatchToProps = (dispatch) => ({
-  startSetUsers: () => dispatch(startSetUsers())
+  startSetUsers: () => dispatch(startSetUsers()),
+    listenToConfigChanges: () => dispatch(listenToConfigChanges())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TjAppRouter);

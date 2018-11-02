@@ -39,7 +39,7 @@ export class CardItem extends React.Component{
                                 <i className="fa fa-circle fa-1x card-custom-fa-circle"><span className="card-logo-image">{this.props.user.userType == 't' ? "T" : "S"}</span></i>
                                 <span className="card-header-name">{this.state.name.toUpperCase()}</span><br></br>
                                 <Rating className="rating-class" emptySymbol="fa fa-star-o fa-1x" fullSymbol="fa fa-star fa-1x" fractions={2} initialRating={this.averageRating()} readonly />
-                                <span className="rating-count-class">({this.props.user.ratingList.length})</span>
+                                <span className="rating-count-class">({this.props.user.ratingList ?this.props.user.ratingList.length: 0})</span>
 
                             </div>
                         </CardHeader>

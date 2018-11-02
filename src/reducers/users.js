@@ -17,6 +17,15 @@ export default (state = usersReducerDefaultState, action) => {
       return user;
     };
   });
+  case 'SYNC_USERS': return state.map((user) => {
+        if (user.id === action.users.id) {
+    return {
+        ...action.users
+  };
+  } else {
+    return user;
+  };
+});
     default:
       return state;
   }
