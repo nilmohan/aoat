@@ -8,66 +8,84 @@ import {states} from '../Helpers/State';
 
 
 export class Profile extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-      const myProfile = (props.loginUser && props.loginUser.profile) ? props.loginUser.profile : {};
-      const address = (props.loginUser && props.loginUser.address) ? props.loginUser.address : {};
-    this.state = {
-      name: props.loginUser ? props.loginUser.name : '',
-      mobileNo: props.loginUser ? props.loginUser.mobileNo : '',
-      userType: props.loginUser ? props.loginUser.userType : '',
-      gender: props.loginUser ? props.loginUser.gender : '',
+        const myProfile = (props.loginUser && props.loginUser.profile) ? props.loginUser.profile : {};
+        const address = (props.loginUser && props.loginUser.address) ? props.loginUser.address : {};
+        this.state = {
+            name: props.loginUser ? props.loginUser.name : '',
+            mobileNo: props.loginUser ? props.loginUser.mobileNo : '',
+            userType: props.loginUser ? props.loginUser.userType : '',
+            gender: props.loginUser ? props.loginUser.gender : '',
 
-      subjects: myProfile.subjects,
-      classes: myProfile.classes,
-      experience: myProfile.experience,
-      locality: myProfile.locality,
-      isFeeNegotiable : myProfile.isFeeNegotiable,
-      tuitionType: myProfile.tuitionType,
-      contactType: myProfile.contactType,
-      availableFordemo: myProfile.availableFordemo,
-        urgentRequirement: myProfile.urgentRequirement,
-        paymentInfo: myProfile.paymentInfo,
-        otherInfo: myProfile.otherInfo,
+            subjects: myProfile.subjects,
+            classes: myProfile.classes,
+            experience: myProfile.experience,
+            locality: myProfile.locality,
+            isFeeNegotiable : myProfile.isFeeNegotiable,
+            tuitionType: myProfile.tuitionType,
+            contactType: myProfile.contactType,
+            availableFordemo: myProfile.availableFordemo,
+            urgentRequirement: myProfile.urgentRequirement,
+            paymentInfo: myProfile.paymentInfo,
+            otherInfo: myProfile.otherInfo,
 
-        address1 : address.address1,
-        address2 : address.address2,
-        selectedDistrict : address.district,
-        selectedState : address.state,
-        zip : address.zip,
+            address1 : address.address1,
+            address2 : address.address2,
+            selectedDistrict : address.district,
+            selectedState : address.state,
+            zip : address.zip,
 
-      calendarFocused: false,
-      error: '',
+            calendarFocused: false,
+            error: '',
 
-      picture: '',
-      pictureUrl: (props.loginUser && props.loginUser.profilePictureUrl) ? props.loginUser.profilePictureUrl : null,
-        selectedState:{},
-        districts: [],
-
-        doSaveEnable: true
-    };
-  }
-
-   validateAll = () =>{
-        if(this.state.name != '' || this.state.userType != '' || this.state.gender != '' || this.state.mobileNo != '' ||
-            this.state.subjects != ''){
-            this.setState(() => ({ doSaveEnable: false }));
-        }
+            picture: '',
+            pictureUrl: (props.loginUser && props.loginUser.profilePictureUrl) ? props.loginUser.profilePictureUrl : null,
+            selectedState:{},
+            districts: []
+        };
     }
-  onNameChange = (e) => {
-  const name = e.target.value;
-  this.setState(() => ({ name }));
+
+    validateAll = () =>{
+    if(this.state.name != '' && this.state.userType != '' && this.state.gender != '' && this.state.mobileNo != '' &&
+    this.state.subjects != '' && this.state.classes != '' && this.state.experience != '' ){
+    //this.setState(() => ({ doSaveEnable: false }));
+}
+};
+
+handleChange(e){
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    const errorName = name+"Error";
+    //this.setState(() => ({ [name]: value }));
+
+    if( value === '' || value === null ){
+        this.setState({
+            [errorName]:true,
+            [name]:e.target.value
+        })
+    } else {
+        this.setState({
+            [errorName]:false,
+            [name]:e.target.value
+        })
+    }
+};
+
+onNameChange = (e) => {
+    const name = e.target.value;
+    this.setState(() => ({ name }));
 
 };
 onMobileNoChange = (e) => {
-  const mobileNo = e.target.value;
-  this.setState(() => ({ mobileNo }));
-    this.validateAll();
+    const mobileNo = e.target.value;
+    this.setState(() => ({ mobileNo }));
 };
 
 onSave = () =>{
-  console.log('save called '+ this.state.userType);
+    console.log('save called '+ this.state.userType);
 
     const profile = {
         subjects : this.state.subjects? this.state.subjects :'',
@@ -93,23 +111,23 @@ onSave = () =>{
     }
 
 
-  this.props.startEditUser(this.props.loginUser.id, {
-    name: this.props.loginUser.name,
-    email: this.props.loginUser.email,
-    userType: this.state.userType,
-    gender: this.state.gender,
-    mobileNo: this.state.mobileNo,
-    profilePicture: this.state.picture,
-    profile: profile,
-    address: address});
+    this.props.startEditUser(this.props.loginUser.id, {
+        name: this.props.loginUser.name,
+        email: this.props.loginUser.email,
+        userType: this.state.userType,
+        gender: this.state.gender,
+        mobileNo: this.state.mobileNo,
+        profilePicture: this.state.picture,
+        profile: profile,
+        address: address});
 }
 onGenderChange = (e) => {
     const gender = e.target.value;
     this.setState(() => ({ gender }));
 };
 onUserTypeChange = (e) => {
-  const userType = e.target.value;
-  this.setState(() => ({ userType }));
+    const userType = e.target.value;
+    this.setState(() => ({ userType }));
 };
 
 
@@ -199,42 +217,48 @@ onOtherInfoChange = (e) =>{
 };
 
 displayPicture(event) {
-  let reader = new FileReader();
-  let file = event.target.files[0];
-  reader.onloadend = () => {
-    console.log(file);
-    this.setState({
-      picture: file,
-      pictureUrl: reader.result
-    });
-  };
-  reader.readAsDataURL(file);
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+        console.log(file);
+        this.setState({
+            picture: file,
+            pictureUrl: reader.result
+        });
+    };
+    reader.readAsDataURL(file);
 };
 
 render() {
     const updatedDate = this.props.loginUser.updatedDate;
-  return (
-      <div className="login-profile">
-      {this.state.error && <p>{this.state.error}</p>}
-    <Form>
-        <Container>
-            <Row form>
-            <Col sm={2}>
-                    <PreviewPicture picture={this.state.picture} pictureUrl={this.state.pictureUrl}/>
-                    <div>
-                        <Label for="profile_file_input" className="label-profile">Upload Profile Picture</Label>
-                        <Input id="profile_file_input"  type="file" className="form-control"onChange={(event) => {this.displayPicture(event);}} />
-                    </div>
-            </Col>
-            <Col md={6}>
-                <FormGroup>
-                    <Label>Last Updated </Label> {' :  '}
-                    <Label><p>{moment(updatedDate).format('Do MMMM  YYYY, h:mm:ss a')}</p></Label>
-                </FormGroup>
-                <FormGroup>
-                    <Label>Name</Label> {' :  '}
-                    <Label><p>{this.state.name}</p></Label>
-                </FormGroup>
+    //this.state.name != '' && this.state.userType != '' && this.state.gender != '' && this.state.mobileNo != '' &&
+    //this.state.subjects != '' && this.state.classes != '' && this.state.experience != ''
+
+    const doSaveDisable =  this.state.mobileNo == '' | this.state.subjects == '' | this.state.classes == '' |
+        this.state.experience == '';
+
+    return (
+        <div className="login-profile">
+        {this.state.error && <p>{this.state.error}</p>}
+<Form>
+    <Container>
+    <Row form>
+    <Col sm={2}>
+        <PreviewPicture picture={this.state.picture} pictureUrl={this.state.pictureUrl}/>
+<div>
+    <Label for="profile_file_input" className="label-profile">Upload Profile Picture</Label>
+    <Input id="profile_file_input"  type="file" className="form-control"onChange={(event) => {this.displayPicture(event);}} />
+</div>
+    </Col>
+    <Col md={6}>
+        <FormGroup>
+        <Label>Last Updated </Label> {' :  '}
+    <Label><p>{moment(updatedDate).format('Do MMMM  YYYY, h:mm:ss a')}</p></Label>
+    </FormGroup>
+    <FormGroup>
+    <Label>Name</Label> {' :  '}
+    <Label><p>{this.state.name}</p></Label>
+    </FormGroup>
     <FormGroup>
     <Label>Gender</Label> {' :  '}
 
@@ -245,50 +269,50 @@ render() {
         <Label check> <Input type="radio" value="f" name={this.state.gender} onChange={this.onGenderChange} checked={this.state.gender === "f"} disabled={this.props.loginUser.gender != null} />{' '}<p>{ '  '} Female</p></Label>
     </FormGroup>
     </FormGroup>
-                <FormGroup>
-                    <Label>User Type</Label> {' :  '}
+    <FormGroup>
+    <Label>User Type</Label> {' :  '}
 
-                    <FormGroup check inline>
-                    <Label check > <Input type="radio" value="s" name={this.state.userType}  onChange={this.onUserTypeChange} checked={this.state.userType === "s"} disabled={this.props.loginUser.userType != null}/>{' '} <p>Student</p> </Label>
-                    </FormGroup>
-                    <FormGroup check inline className="fg-margin">
-                    <Label check> <Input type="radio" value="t" name={this.state.userType} onChange={this.onUserTypeChange} checked={this.state.userType === "t"} disabled={this.props.loginUser.userType != null} />{' '}<p>{ '  '} Teacher</p></Label>
-                    </FormGroup>
-                </FormGroup>
-                <FormGroup>
-                    <Label>Email Id</Label> {' :  '}
-                    <Label><p>{this.props.loginUser.email}</p></Label>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="mobileNo">Mobile No</Label>{' :  '}
-                    <Input value={this.state.mobileNo} className="mobile-no-field" onChange={this.onMobileNoChange} />
-                </FormGroup>
-            </Col>
-            <Col sm={3}>
-            </Col>
-            </Row>
+    <FormGroup check inline>
+    <Label check > <Input type="radio" value="s" name={this.state.userType}  onChange={this.onUserTypeChange} checked={this.state.userType === "s"} disabled={this.props.loginUser.userType != null}/>{' '} <p>Student</p> </Label>
+    </FormGroup>
+    <FormGroup check inline className="fg-margin">
+        <Label check> <Input type="radio" value="t" name={this.state.userType} onChange={this.onUserTypeChange} checked={this.state.userType === "t"} disabled={this.props.loginUser.userType != null} />{' '}<p>{ '  '} Teacher</p></Label>
+    </FormGroup>
+    </FormGroup>
+    <FormGroup>
+    <Label>Email Id</Label> {' :  '}
+    <Label><p>{this.props.loginUser.email}</p></Label>
+    </FormGroup>
+    <FormGroup>
+    <Label for="mobileNo">Mobile No</Label>{' :  '}
+    <Input value={this.state.mobileNo} name="mobileNo" className="mobile-no-field" onChange={(e)=>{this.handleChange(e)}} invalid={this.state.mobileNoError} />
+</FormGroup>
+    </Col>
+    <Col sm={3}>
+        </Col>
+        </Row>
         <FormGroup>
         <Label >Prefered Subjects</Label>{' :  '}
-    <Input type="textarea" onChange={this.onSubjectsChange} value={this.state.subjects}/>
+    <Input type="textarea" onChange={(e)=>{this.handleChange(e)}} invalid={this.state.subjectsError} name="subjects" value={this.state.subjects}/>
 </FormGroup >
     <FormGroup >
     <Label >Prefered Classes</Label>{' :  '}
-    <Input type="textarea" onChange={this.onClassesChange} value={this.state.classes}/>
+    <Input type="textarea" onChange={(e)=>{this.handleChange(e)}} invalid={this.state.classesError} name="classes" value={this.state.classes}/>
 </FormGroup>
     <FormGroup hidden={this.state.userType == '' | this.state.userType == 's'} >
-    <Label >Experience</Label>{' :  '}
-    <Input type="textarea" onChange={this.onExperienceChange} value={this.state.experience}/>
-</FormGroup>
-    <FormGroup hidden={this.state.userType == '' | this.state.userType == 't'} >
+<Label >Experience</Label>{' :  '}
+    <Input type="textarea" onChange={(e)=>{this.handleChange(e)}} invalid={this.state.experienceError} value={this.state.experience} name="experience"/>
+        </FormGroup>
+        <FormGroup hidden={this.state.userType == '' | this.state.userType == 't'} >
 <Label >School Or College Information</Label>{' :  '}
     <Input type="textarea" />
-</FormGroup>
-    <FormGroup>
-    <Label >Prefered Locality for Tuituon</Label>{' :  '}
-                                  <Input type="textarea" onChange={this.onLocalityChange} value={this.state.locality}/>
+        </FormGroup>
+        <FormGroup>
+        <Label >Prefered Locality for Tuituon</Label>{' :  '}
+                                      <Input type="textarea" onChange={this.onLocalityChange} value={this.state.locality}/>
 </FormGroup>
     <FormGroup hidden={this.state.userType == '' | this.state.userType == 's'}>
-    <Label >Payment Info</Label>{' :  '}
+<Label >Payment Info</Label>{' :  '}
     <Input type="textarea" onChange={this.onPaymentInfoChange} value={this.state.paymentInfo}/>
 <FormFeedback>I will charge Rs 2000/- per subject.</FormFeedback>
     </FormGroup>
@@ -322,78 +346,78 @@ render() {
     </FormGroup>
     </FormGroup>
     <FormGroup check hidden={this.state.userType == '' | this.state.userType == 's'}>
-    <Input type="checkbox" name="availableFordemo" id="availableFordemo" checked={this.state.availableFordemo} onChange={this.onAvailableFordemoChange}/>
+<Input type="checkbox" name="availableFordemo" id="availableFordemo" checked={this.state.availableFordemo} onChange={this.onAvailableFordemoChange}/>
 <Label for="availableFordemo" check><p>I am avalable for demo upto 5 classes.</p></Label>
     </FormGroup>
 
-            <FormGroup>
-                <Label >Other Information</Label>{' :  '}
-                <Input type="textarea" onChange={this.onOtherInfoChange} value={this.state.otherInfo}/>
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleAddress">Address</Label>
-                <Input type="text" name="address" id="exampleAddress" placeholder="1234 Main St" value={this.state.address1}  onChange={this.onAddress1Change}/>
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleAddress2">Address 2</Label>
-                <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor" value={this.state.address2}  onChange={this.onAddress2Change}/>
-            </FormGroup>
-            <Row form>
-                <Col md={6}>
-                    <FormGroup>
-                        <Label for="stateSelect">State</Label>
-                        <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedState}>
-                        <option value="Select State">Select State</option>
-                            {states.map((item, i) => <option value= {item.key} key={i}>{item.name}</option>)}
-                        </CustomInput>
-                    </FormGroup>
-                </Col>
-                <Col md={4}>
-                    <FormGroup>
-                        <Label for="districtSelect">District</Label>
-                        <CustomInput type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedDistrict}>
-                            <option value="select">Select</option>
-                            {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
-                        </CustomInput>
-                    </FormGroup>
-                </Col>
-                <Col md={2}>
-                <FormGroup>
-                <Label for="exampleZip">Zip</Label>
-                <Input type="text" name="zip" id="exampleZip" value={this.state.zip}  onChange={this.onZipChange} invalid={this.state.zip== ''}/>
-                </FormGroup>
-                </Col>
-            </Row>
+    <FormGroup>
+    <Label >Other Information</Label>{' :  '}
+    <Input type="textarea" onChange={this.onOtherInfoChange} value={this.state.otherInfo}/>
+</FormGroup>
+    <FormGroup>
+    <Label for="exampleAddress">Address</Label>
+        <Input type="text" name="address" id="exampleAddress" placeholder="1234 Main St" value={this.state.address1}  onChange={this.onAddress1Change}/>
+</FormGroup>
+    <FormGroup>
+    <Label for="exampleAddress2">Address 2</Label>
+    <Input type="text" name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor" value={this.state.address2}  onChange={this.onAddress2Change}/>
+</FormGroup>
+    <Row form>
+    <Col md={6}>
+        <FormGroup>
+        <Label for="stateSelect">State</Label>
+        <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedState}>
+<option value="Select State">Select State</option>
+    {states.map((item, i) => <option value= {item.key} key={i}>{item.name}</option>)}
+</CustomInput>
+    </FormGroup>
+    </Col>
+    <Col md={4}>
+        <FormGroup>
+        <Label for="districtSelect">District</Label>
+        <CustomInput type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedDistrict}>
+<option value="select">Select</option>
+        {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
+</CustomInput>
+    </FormGroup>
+    </Col>
+    <Col md={2}>
+        <FormGroup>
+        <Label for="exampleZip">Zip</Label>
+        <Input type="text" name="zip" id="exampleZip" onChange={(e)=>{this.handleChange(e)}} invalid={this.state.zipError} value={this.state.zip} name="zip"/>
+        </FormGroup>
+        </Col>
+        </Row>
 
-    <FormGroup check hidden={this.state.userType == '' | this.state.userType == 't'}>
-    <Input type="checkbox" name="urgentRequirement" id="urgentRequirement" checked={this.state.urgentRequirement} onChange={this.onUrgentRequirementChange}/>
+        <FormGroup check hidden={this.state.userType == '' | this.state.userType == 't'}>
+<Input type="checkbox" name="urgentRequirement" id="urgentRequirement" checked={this.state.urgentRequirement} onChange={this.onUrgentRequirementChange}/>
 <Label for="urgentRequirement" check><p>I need a teacher urgently for all of my subjects.</p></Label>
     </FormGroup>
     <FormGroup check>
     <Input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
-<Label for="termsAndConditions" check><p>All above informations correct and I am having all related documents for further verification.</p></Label>
+        <Label for="termsAndConditions" check><p>All above informations correct and I am having all related documents for further verification.</p></Label>
     </FormGroup>
-            <FormGroup className="profile-button-group" check row>
-                <Col sm={{ size: 10, offset: 4 }}>
-                    <Button color="primary" size="sm" onClick={() => this.onSave()} disabled={this.state.doSaveEnable} >Save</Button>{' '}
-                    <Button color="secondary" size="sm">Edit</Button>
-                </Col>
-            </FormGroup>
+    <FormGroup className="profile-button-group" check row>
+    <Col sm={{ size: 10, offset: 4 }}>
+<Button color="primary" size="sm" onClick={() => this.onSave()} disabled={doSaveDisable} >Save</Button>{' '}
+        <Button color="secondary" size="sm">Edit</Button>
+        </Col>
+        </FormGroup>
         </Container>
 
-  </Form>
-  </div>
+        </Form>
+        </div>
 )
 }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddUser: (user) => dispatch(startAddUser(user)),
+    startAddUser: (user) => dispatch(startAddUser(user)),
     startEditUser: (id,user) => dispatch(startEditUser(id,user))
 });
 const mapStateToProps = (state) => {
-  return {
-    loginUser: state.loginUser
-  };
+    return {
+        loginUser: state.loginUser
+    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
