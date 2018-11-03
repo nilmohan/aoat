@@ -32,6 +32,7 @@
     "history": "4.7.2",
     "image-webpack-loader": "^4.3.1",
     "images-upload-middleware": "^1.1.1",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "node-sass": "4.5.3",
     "normalize.css": "7.0.0",

@@ -45,7 +45,6 @@ export class CardItem extends React.Component{
                         </CardHeader>
                         <CardImg top  className="card-img-content" src={this.props.user.profilePictureUrl ? this.props.user.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"} />
                         <CardBody>
-                            <div>Banglore</div>
                             <div>10th, 12th</div>
                             <div>Math, Science</div>
                         </CardBody>

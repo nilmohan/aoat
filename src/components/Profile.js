@@ -43,16 +43,27 @@ export class Profile extends React.Component {
       picture: '',
       pictureUrl: (props.loginUser && props.loginUser.profilePictureUrl) ? props.loginUser.profilePictureUrl : null,
         selectedState:{},
-        districts: []
+        districts: [],
+
+        doSaveEnable: true
     };
   }
+
+   validateAll = () =>{
+        if(this.state.name != '' || this.state.userType != '' || this.state.gender != '' || this.state.mobileNo != '' ||
+            this.state.subjects != ''){
+            this.setState(() => ({ doSaveEnable: false }));
+        }
+    }
   onNameChange = (e) => {
   const name = e.target.value;
   this.setState(() => ({ name }));
+
 };
 onMobileNoChange = (e) => {
   const mobileNo = e.target.value;
   this.setState(() => ({ mobileNo }));
+    this.validateAll();
 };
 
 onSave = () =>{
@@ -100,10 +111,7 @@ onUserTypeChange = (e) => {
   const userType = e.target.value;
   this.setState(() => ({ userType }));
 };
-onMobileNoChange = (e) => {
-  const mobileNo = e.target.value;
-  this.setState(() => ({ mobileNo }));
-};
+
 
 onSubjectsChange = (e) =>{
     const subjects = e.target.value;
@@ -352,7 +360,7 @@ render() {
                 <Col md={2}>
                 <FormGroup>
                 <Label for="exampleZip">Zip</Label>
-                <Input type="text" name="zip" id="exampleZip" value={this.state.zip}  onChange={this.onZipChange}/>
+                <Input type="text" name="zip" id="exampleZip" value={this.state.zip}  onChange={this.onZipChange} invalid={this.state.zip== ''}/>
                 </FormGroup>
                 </Col>
             </Row>
@@ -363,11 +371,11 @@ render() {
     </FormGroup>
     <FormGroup check>
     <Input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
-<Label for="termsAndConditions" check><p>I filled all abouve informations correctly and having all related documents for further verification.</p></Label>
+<Label for="termsAndConditions" check><p>All above informations correct and I am having all related documents for further verification.</p></Label>
     </FormGroup>
             <FormGroup className="profile-button-group" check row>
                 <Col sm={{ size: 10, offset: 4 }}>
-                    <Button color="primary" size="sm" onClick={() => this.onSave()} >Save</Button>{' '}
+                    <Button color="primary" size="sm" onClick={() => this.onSave()} disabled={this.state.doSaveEnable} >Save</Button>{' '}
                     <Button color="secondary" size="sm">Edit</Button>
                 </Col>
             </FormGroup>

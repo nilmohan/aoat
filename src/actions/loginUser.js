@@ -13,9 +13,10 @@ export const startAddUser = (userData = {}) => {
         const {
             name = '',
             mobileNo = '',
-            email =''
+            email = '',
+            isUserVerified = false
             } = userData;
-        const user = { name, mobileNo, email };
+        const user = { name, mobileNo, email, isUserVerified };
 
         database.ref('users').push(user).then((ref) => {
             dispatch(addUser({

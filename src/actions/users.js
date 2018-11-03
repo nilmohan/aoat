@@ -30,10 +30,13 @@ export const startSetUsers = () => {
           const userList = [];
 
     snapshot.forEach((childSnapshot) => {
-      userList.push({
-      id: childSnapshot.key,
-        ...childSnapshot.val()
-  });
+      if(childSnapshot.val().isUserVerified != undefined && childSnapshot.val().isUserVerified){
+        userList.push({
+          id: childSnapshot.key,
+            ...childSnapshot.val()
+        });
+      }
+
   });
 
     dispatch(setUsers(userList));
@@ -67,8 +70,7 @@ export const listenToConfigChanges = () => {
   return (dispatch, getState) => {
     database.ref('users').on('child_changed', (snapshot) => {
       console.log(snapshot.key, snapshot.val());
-      dispatch( syncUsers(snapshot.val()));
-
+        dispatch(syncUsers({id: snapshot.key, ...snapshot.val()}));
     }, (e) =>{
       console.log("Error with data fetching", e);
     });
