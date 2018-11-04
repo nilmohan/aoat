@@ -2,7 +2,7 @@ import React from 'react';
 import UserList from './UserList';
 import CardItem from './CardItem';
 import CardList from './CardList';
-import { Container, Row, Col, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { Container, Row, Col, FormGroup, Label, Input, CustomInput, Alert } from 'reactstrap';
 import { setFilterAll, setFilterByStudent, setFilterByTeacher, setFilterByState, setFilterByDistrict } from '../actions/filters';
 import { connect } from 'react-redux';
 import selectUsers from '../selectors/users';
@@ -16,7 +16,8 @@ class HomePage extends React.Component
         this.state= {
             selectedState:{
             },
-            districts: []
+            districts: [],
+            visible: !props.loginUser.isUserVerified
         }
 
     };
@@ -47,10 +48,13 @@ onDistrictChange =(event)=>{
 
     this.props.dispatch(setFilterByDistrict(event.target.value));
 }
-
+onDismiss = () => {
+    this.setState({ visible: false });
+}
     render(){
         return (
             <div>
+
             <Row className="home-content">
             <Col sm="2" md={{ size: 2, offset: 0 }} className="home-filter-panel">
             <div className="filter-criteria-header" > <h5>Filter Criteria</h5></div>
@@ -86,7 +90,9 @@ onDistrictChange =(event)=>{
 
         </Col>
         <Col sm="10" md={{ size: 10, offset: 0 }}>
-        Dashboard page content
+<Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
+    You are yet to update your profile. Please update your profile to get access to other teacher and students !
+    </Alert>
         <CardList/></Col>
         </Row>
         </div>
@@ -97,7 +103,8 @@ onDistrictChange =(event)=>{
 
 const mapStateToProps = (state) => {
     return {
-        filters: state.filters
+        filters: state.filters,
+        loginUser: state.loginUser
     };
 };
 

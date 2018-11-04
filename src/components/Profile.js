@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Row, Container, CustomInput } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Row, Container, CustomInput, Alert } from 'reactstrap';
 import { connect } from 'react-redux';
 import {startEditUser} from '../actions/loginUser';
 import PreviewPicture from './PreviewPicture';
@@ -13,6 +13,7 @@ export class Profile extends React.Component {
 
         const myProfile = (props.loginUser && props.loginUser.profile) ? props.loginUser.profile : {};
         const address = (props.loginUser && props.loginUser.address) ? props.loginUser.address : {};
+        const myState = states.filter((state) => {return state.key === address.state});
         this.state = {
             name: props.loginUser ? props.loginUser.name : '',
             mobileNo: props.loginUser ? props.loginUser.mobileNo : '',
@@ -42,8 +43,9 @@ export class Profile extends React.Component {
 
             picture: '',
             pictureUrl: (props.loginUser && props.loginUser.profilePictureUrl) ? props.loginUser.profilePictureUrl : null,
-            selectedState:{},
-            districts: []
+            districts: myState!== null? myState[0].districts : [],
+
+            visible: false
         };
     }
 
@@ -61,17 +63,29 @@ handleChange(e){
     const errorName = name+"Error";
     //this.setState(() => ({ [name]: value }));
 
-    if( value === '' || value === null ){
+    if( value === '' || value === null){
         this.setState({
             [errorName]:true,
             [name]:e.target.value
         })
-    } else {
+    } else if(target.type !== 'checkbox'){
         this.setState({
             [errorName]:false,
             [name]:e.target.value
         })
     }
+
+     if(target.type === 'checkbox' && value === true){
+        this.setState({
+            [errorName]:false,
+            [name]:value
+        })
+    }else if(target.type === 'checkbox' && value === false){
+         this.setState({
+             [errorName]:true,
+             [name]:value
+         })
+     }
 };
 
 onNameChange = (e) => {
@@ -93,8 +107,8 @@ onSave = () =>{
         experience: this.state.experience? this.state.experience : '',
         locality: this.state.locality? this.state.experience : '',
         isFeeNegotiable : this.state.isFeeNegotiable? this.state.isFeeNegotiable : '',
-        tuitionType: this.state.tuitionType? this.state.tuitionType: '',
-        contactType: this.state.contactType? this.state.contactType : '',
+        tuitionType: this.state.tuitionType? this.state.tuitionType: 'both',
+        contactType: this.state.contactType? this.state.contactType : 'both',
         availableFordemo: this.state.availableFordemo ? this.state.availableFordemo : '',
         updatedDate: new Date(),
         urgentRequirement: this.state.urgentRequirement? this.state.urgentRequirement: '',
@@ -120,6 +134,8 @@ onSave = () =>{
         profilePicture: this.state.picture,
         profile: profile,
         address: address});
+
+    this.setState({ visible: true, termsAndConditions: false });
 }
 onGenderChange = (e) => {
     const gender = e.target.value;
@@ -229,17 +245,20 @@ displayPicture(event) {
     reader.readAsDataURL(file);
 };
 
+onDismiss = () => {
+    this.setState({ visible: false });
+}
 render() {
     const updatedDate = this.props.loginUser.updatedDate;
-    //this.state.name != '' && this.state.userType != '' && this.state.gender != '' && this.state.mobileNo != '' &&
-    //this.state.subjects != '' && this.state.classes != '' && this.state.experience != ''
-
-    const doSaveDisable =  this.state.mobileNo == '' | this.state.subjects == '' | this.state.classes == '' |
-        this.state.experience == '';
+    const doSaveDisable =  this.state.gender == '' || this.state.userType == '' || this.state.mobileNo == '' ||
+                           this.state.subjects == '' || this.state.classes == '' || this.state.experience == '' ||
+                           !this.state.termsAndConditions;
 
     return (
         <div className="login-profile">
-        {this.state.error && <p>{this.state.error}</p>}
+        <Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
+            Congradulations. Your profile updated successfully!
+        </Alert>
 <Form>
     <Container>
     <Row form>
@@ -336,7 +355,7 @@ render() {
     <FormGroup>
     <Label>Contact Medium </Label> {' :  '}
     <FormGroup check inline>
-    <Label check> <Input type="radio" value="mobile" checked={this.state.contactType === "mobile"} onChange={this.onContactTypeChange} />{' '} <p>By Mobile</p> </Label>
+    <Label check> <Input type="radio" value="mobile" checked={this.state.contactType === "mobile"} onChange={this.onContactTypeChange}  />{' '} <p>By Mobile</p> </Label>
     </FormGroup>
     <FormGroup className="fg-margin" check inline>
     <Label check> <Input type="radio" value="email" checked={this.state.contactType === "email"} onChange={this.onContactTypeChange}  />{' '} <p>By Email</p></Label>
@@ -346,7 +365,7 @@ render() {
     </FormGroup>
     </FormGroup>
     <FormGroup check hidden={this.state.userType == '' | this.state.userType == 's'}>
-<Input type="checkbox" name="availableFordemo" id="availableFordemo" checked={this.state.availableFordemo} onChange={this.onAvailableFordemoChange}/>
+<Input type="checkbox" name="availableFordemo" id="availableFordemo" checked={this.state.availableFordemo}  onChange={(e)=>{this.handleChange(e)}} />
 <Label for="availableFordemo" check><p>I am avalable for demo upto 5 classes.</p></Label>
     </FormGroup>
 
@@ -366,19 +385,19 @@ render() {
     <Col md={6}>
         <FormGroup>
         <Label for="stateSelect">State</Label>
-        <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedState}>
-<option value="Select State">Select State</option>
-    {states.map((item, i) => <option value= {item.key} key={i}>{item.name}</option>)}
-</CustomInput>
+        <Input type="select" name="stateSelect" id="stateSelect" value={this.state.selectedState} onChange={this.onStateChange}>
+        {states.map((item, i) => <option value= {item.key} key={i} >{item.name}</option>)}
+        </Input>
+
     </FormGroup>
     </Col>
     <Col md={4}>
         <FormGroup>
         <Label for="districtSelect">District</Label>
-        <CustomInput type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedDistrict}>
-<option value="select">Select</option>
+        <Input type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedDistrict}>
+
         {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
-</CustomInput>
+</Input>
     </FormGroup>
     </Col>
     <Col md={2}>
@@ -394,7 +413,7 @@ render() {
 <Label for="urgentRequirement" check><p>I need a teacher urgently for all of my subjects.</p></Label>
     </FormGroup>
     <FormGroup check>
-    <Input type="checkbox" name="termsAndConditions" id="termsAndConditions" />
+    <Input type="checkbox" name="termsAndConditions" id="termsAndConditions" onChange={(e)=>{this.handleChange(e)}} invalid={this.state.termsAndConditionsError}/>
         <Label for="termsAndConditions" check><p>All above informations correct and I am having all related documents for further verification.</p></Label>
     </FormGroup>
     <FormGroup className="profile-button-group" check row>
