@@ -45,7 +45,7 @@ export class AddFeedback extends React.Component {
             <div>
                 <form onSubmit={this.onSubmit}>
                     <FormGroup row>
-                        <Label  sm={2} size="lg">Rating</Label>
+                        <Label  sm={2} size="lg">Give your rating here</Label>
                         <Col sm={10}>
                             <Rating emptySymbol="fa fa-star-o fa-1x"
                                     fullSymbol="fa fa-star fa-1x"

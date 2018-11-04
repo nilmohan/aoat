@@ -24,6 +24,7 @@ export class ViewProfile extends React.Component {
     render()
     {
         const address = this.props.user.address;
+        const profile = this.props.user.profile;
         return (
             <Container className="view-profile">
                 <Row>
@@ -37,7 +38,7 @@ export class ViewProfile extends React.Component {
                                 fullSymbol="fa fa-star fa-1x"
                                 fractions={2} className="rating-color"
                                 initialRating= {this.averageRating()} readonly/>
-                                ({this.props.user.ratingList.length})
+                                ({this.props.user.ratingList != null ? this.props.user.ratingList.length: 0})
                         </div>
                         <FormGroup hidden={!this.props.isAuthenticated}>
                             <Label>Email</Label> {' :  '}
@@ -58,37 +59,55 @@ export class ViewProfile extends React.Component {
                             <ListGroupItem>
                                 <ListGroupItemHeading>Subjects</ListGroupItemHeading>
                                 <ListGroupItemText>
-                                    Math, Science
+                                    {profile.subjects}
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem >
                                 <ListGroupItemHeading>Prefered Classes</ListGroupItemHeading>
                                 <ListGroupItemText>
-                                    10th, 12th
+                                    {profile.classes}
+                                </ListGroupItemText>
+                            </ListGroupItem>
+
+                            <ListGroupItem hidden={this.props.user.userType == '' | this.props.user.userType == 's'}>
+                                <ListGroupItemHeading>Experience</ListGroupItemHeading>
+                                <ListGroupItemText>
+                                    {profile.experience}
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem >
-                                <ListGroupItemHeading>Experience</ListGroupItemHeading>
+                                <ListGroupItemHeading>Preferred Tuition Type </ListGroupItemHeading>
+                                <ListGroupItemText >
+                                {profile.tuitionType === 'both'?'I preferred both individual and group tuition.':
+                                    profile.tuitionType === 'individual'?'I preferred only individual tuition.':
+                                        profile.tuitionType === 'group'?'I preferred only group tuition.': ''}
+                                </ListGroupItemText>
+                            </ListGroupItem>
+
+                            <ListGroupItem >
+                                <ListGroupItemHeading>Communication and Contact </ListGroupItemHeading>
                                 <ListGroupItemText>
-                                    10 years of experience
+                                {profile.contactType ==='both'?'Anyone can contact me by both email and mobile.':
+                                    profile.contactType ==='email'?'Anyone can contact me by only email.':
+                                    profile.contactType ==='mobile'?'Anyone can contact me by only mobile.':''}
+                                </ListGroupItemText>
+                            </ListGroupItem>
+                            <ListGroupItem hidden={this.props.user.userType == '' | this.props.user.userType == 's'}>
+                                <ListGroupItemHeading>Prefered Payment Info </ListGroupItemHeading>
+                                <ListGroupItemText>
+                                {profile.paymentInfo}
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem >
                                 <ListGroupItemHeading>Others</ListGroupItemHeading>
                                 <ListGroupItemText>
-                                    Other information
+                                    {profile.otherInfo}
                                 </ListGroupItemText>
                             </ListGroupItem>
                             <ListGroupItem >
                                 <ListGroupItemText>
-                                    <div>I prefered to do group or indivisual classes </div>
-                                    <div>I am available for demo classes </div>
-                                </ListGroupItemText>
-                            </ListGroupItem>
-                            <ListGroupItem >
-                                <ListGroupItemText>
-                                    <div>I am charging of 1000 rupees per course </div>
-                                    <div>Price is slightly negotiable</div>
+
+    <div>{this.props.user.userType =='t' && profile.availableFordemo?'I am available for demo classes':''}</div>
                                 </ListGroupItemText>
                             </ListGroupItem>
                         </ListGroup>
@@ -103,13 +122,13 @@ export class ViewProfile extends React.Component {
                 <Row>
                     <Col>
                         {
-                            this.props.user.ratingList === 0 ? (<p>No rating..</p>) :
+                        (this.props.user.ratingList === undefined || this.props.user.ratingList === 0) ? (<p>No rating..</p>) :
                             (this.props.user.ratingList.map((rating, index) => {return <RatingItem key={index} {...rating} />}))
                         }
                     </Col>
                 </Row>
                 <Row>
-                    <Col>{this.props.isAuthenticated ? <AddFeedback user = {this.props.user}/> : '' }</Col>
+                    <Col>{(this.props.isAuthenticated && this.props.loginUser.id !== this.props.user.id)? <AddFeedback user = {this.props.user}/> : '' }</Col>
                 </Row>
             </Container>
     );
@@ -118,7 +137,8 @@ export class ViewProfile extends React.Component {
 
 const mapStateToProps = (state, props) => ({
         user: state.users.find((user) => user.id === props.match.params.id),
-        isAuthenticated: !!state.auth.uid
+        isAuthenticated: !!state.auth.uid,
+        loginUser: state.loginUser
 });
 
 
