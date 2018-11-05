@@ -2,8 +2,8 @@ import React from 'react';
 import UserList from './UserList';
 import CardItem from './CardItem';
 import CardList from './CardList';
-import { Container, Row, Col, FormGroup, Label, Input, CustomInput, Alert } from 'reactstrap';
-import { setFilterAll, setFilterByStudent, setFilterByTeacher, setFilterByState, setFilterByDistrict } from '../actions/filters';
+import { Container, Row, Col, FormGroup, Label, Input, CustomInput, Alert, Button } from 'reactstrap';
+import { setFilterAll, setFilterByStudent, setFilterByTeacher, setFilterByState, setFilterByDistrict, setResetFilter } from '../actions/filters';
 import { connect } from 'react-redux';
 import selectUsers from '../selectors/users';
 import {states} from '../Helpers/State';
@@ -49,7 +49,12 @@ onDistrictChange =(event)=>{
     this.props.dispatch(setFilterByDistrict(event.target.value));
 }
 onDismiss = () => {
-    this.setState({ visible: false });
+    this.setState({ districts: false });
+}
+
+onReset = () => {
+    this.setState({selectedState:'',districts: []});
+    this.props.dispatch(setResetFilter());
 }
     render(){
         return (
@@ -74,20 +79,22 @@ onDismiss = () => {
         </FormGroup>
     <FormGroup>
     <Label for="stateSelect">Select State</Label>
-    <CustomInput type="select" id="stateSelect" name="stateSelect" onChange={this.onStateChange} value={this.state.selectedDistrict}>
-        <option value="Select State">Select State</option>
-        {states.map((state, i) => <option value={state.key} key={i}>{state.name}</option>)}
-    </CustomInput>
+    <Input type="select" name="stateSelect" id="stateSelect" value={this.state.selectedState} onChange={this.onStateChange}>
+<option value="Select State">Select State</option>
+    {states.map((item, i) => <option value= {item.key} key={i} >{item.name}</option>)}
+</Input>
     </FormGroup>
 
     <FormGroup>
     <Label for="districtSelect">Select District</Label>
-    <CustomInput type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedState}>
-        <option value="select">Select</option>
-        {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
-    </CustomInput>
+    <Input type="select" id="districtSelect" name="districtSelect" onChange={this.onDistrictChange} value={this.state.selectedDistrict}>
+<option value="select">Select District</option>
+    {this.state.districts.map((district, i) => <option value={district} key={i}>{district}</option>)}
+</Input>
     </FormGroup>
-
+    <Button className="home-reset-btn"color="primary" size="sm" onClick={() => this.onReset()}>Reset</Button>
+    <FormGroup>
+    </FormGroup>
         </Col>
         <Col sm="10" md={{ size: 10, offset: 0 }}>
 <Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>

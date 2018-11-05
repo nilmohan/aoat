@@ -358,3 +358,7 @@ p {
     font-size: x-small;
     color: orange;
 }
+
+.home-reset-btn{
+    margin-top: 10px;
+}

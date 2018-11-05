@@ -19,6 +19,10 @@ export const setFilterAll = (all = false) => ({
   all
 });
 
+export const setResetFilter = () => ({
+  type: 'RESET_FILTER'
+});
+
 export const setFilterByState = (byState = '') => ({
   type: 'SET_FILTER_BY_STATE',
   byState

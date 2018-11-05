@@ -18,6 +18,15 @@ export default (state = filtersReducerDefaultState, action) => {
           byStudent: false,
           byTeacher: false
       };
+    case 'RESET_FILTER':
+      return {
+          ...state,
+          all: true,
+          byStudent: false,
+          byTeacher: false,
+          byState: '',
+          byDistrict: ''
+    };
     case 'SET_FILTER_BY_STUDENT':
       return {
           ...state,
@@ -35,13 +44,12 @@ case 'SET_FILTER_BY_STATE':
   return {
       ...state,
       byState: action.byState,
-      all: false
+      byDistrict: ''
 };
 case 'SET_FILTER_BY_DISTRICT':
   return {
       ...state,
-      byDistrict: action.byDistrict,
-      all: false
+      byDistrict: action.byDistrict
 };
     case 'SET_TEXT_FILTER':
       return {
