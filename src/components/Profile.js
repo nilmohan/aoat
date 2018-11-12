@@ -272,7 +272,7 @@ render() {
     <Col md={6}>
         <FormGroup>
         <Label>Last Updated </Label> {' :  '}
-    <Label><p>{moment(updatedDate).format('Do MMMM  YYYY, h:mm:ss a')}</p></Label>
+    <Label><p>{moment(updatedDate).format('DD MMMM  YYYY, h:mm:ss a')}</p></Label>
     </FormGroup>
     <FormGroup>
     <Label>Name</Label> {' :  '}

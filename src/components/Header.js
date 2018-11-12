@@ -51,8 +51,8 @@ export class Header extends React.Component {
                 <NavbarToggler onClick={this.toggle} />
 
                 <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem className="navbar-nav ml-auto">
+                    <Nav className="mr-auto" navbar>
+                        <NavItem className="navbar-nav ml-auto nav-fill">
                             <NavLink to="/home" className="nav-link" exact={true}>Home</NavLink>
                         </NavItem>
                         <NavItem className="navbar-nav ml-auto">

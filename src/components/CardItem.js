@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Car
 import Rating from 'react-rating';
 import AppRouter, { history } from '../routers/AppRouter';
 import { NavLink } from 'react-router-dom';
+import moment from 'moment';
 
 
 export class CardItem extends React.Component{
@@ -30,6 +31,7 @@ export class CardItem extends React.Component{
         const pStyle = {
             width: "18rem"
         };
+        const profile = this.props.user.profile;
         return (
             <div style={pStyle} className="my-card-style">
                 <NavLink to={`/home/${this.props.user.id}`}>
@@ -45,8 +47,10 @@ export class CardItem extends React.Component{
                         </CardHeader>
                         <CardImg top  className="card-img-content" src={this.props.user.profilePictureUrl ? this.props.user.profilePictureUrl :"https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/profile%2Fuser.jpg?alt=media&token=5bc1ee82-abca-42af-b5f8-9318d5f214ed"} />
                         <CardBody>
-                            <div>10th, 12th</div>
-                            <div>Math, Science</div>
+                            <div><span >Updated Date : {" "}</span><span className="short-info-desc">{moment(profile.updatedDate).format('DD/MM/YYYY')}</span></div>
+                            <div><span>Classes: {" "}</span><span className="short-info-desc">{profile.classes}</span></div>
+                            <div><span>Subjests: {" "}</span><span className="short-info-desc">{profile.subjects}</span></div>
+                            <div><span>Area: {" "}</span><span className="short-info-desc">{profile.locality}</span></div>
                         </CardBody>
                     </Card>
                 </NavLink>
