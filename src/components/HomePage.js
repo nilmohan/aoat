@@ -7,7 +7,7 @@ import { setFilterAll, setFilterByStudent, setFilterByTeacher, setFilterByState,
 import { connect } from 'react-redux';
 import selectUsers from '../selectors/users';
 import {states} from '../Helpers/State';
-
+import TjCarousel from './TjCarousel';
 class HomePage extends React.Component
 {
     constructor(props) {
@@ -61,7 +61,7 @@ onReset = () => {
             <div>
 
             <Row className="home-content">
-            <Col sm="2" md={{ size: 2, offset: 0 }} className="home-filter-panel">
+            <Col sm="2" md={{ size: 2, offset: 0 }} className="home-filter-panel bg-dark">
             <div className="filter-criteria-header" > <h5>Filter Criteria</h5></div>
 
         <FormGroup className="filter-criteria-f-fg" check>

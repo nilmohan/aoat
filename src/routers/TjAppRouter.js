@@ -18,6 +18,8 @@ import HowItWorks from '../common-components/HowItWorks';
 import AppFeedback from '../common-components/AppFeedback';
 import AboutUs from '../common-components/AboutUs';
 import UserView from '../common-components/UserView';
+import OurGola from '../common-components/OurGoal';
+
 
 export const history = createHistory();
 
@@ -41,6 +43,7 @@ const TjAppRouter = (props) => {
       </Switch>
 
     </div>
+      <OurGola />
           <UserView />
       <AboutUs />
       <Footer/>

@@ -1,6 +1,6 @@
 body{
     color: white;
-    font-family: 'Lato', 'Arial', sans-serif;
+    font-family: 'Athiti', sans-serif;
     font-weight: 300;
     /*font-size: 20px;*/
     text-rendering: optimizeLegibility;
@@ -67,8 +67,10 @@ body{
     text-overflow: ellipsis;
     width: 110px;
     display: inline-block;
-    font-size: xx-small;
+    font-size: x-small;
     font-weight: 600;
+    color: white;
+
 }
 .rating-class{
     margin-left: 24px;
@@ -98,6 +100,7 @@ body{
 .card-body{
     font-size: 12px;
     padding: 0.25rem;
+    color: #343a40;
 }
 
 
@@ -150,13 +153,19 @@ h2:after {
     margin: 0 auto;
     margin-top: 30px;
 }
-
+.navbar-class{
+    /*margin-left: 10%;*/
+}
+.header-user-info{
+    text-align: center;
+}
+.small-profile-view{
+    text-align: right;
+    margin-right: 12%;
+}
 .small-profile-view img {
     height: 35px;
     border-radius: 50%;
-    position: relative;
-    top: -25px;
-    left: 131px;
 }
 
 
@@ -190,7 +199,7 @@ h2:after {
     margin: 10px;
 }
 .home-filter-panel{
-    background-color: #686665;
+
 }
 .filter-criteria-f-fg{
     margin-top: 10px;
@@ -283,13 +292,10 @@ footer {
 
 
 .filter-criteria-header{
-    background-color: #343a40;
-    position: relative;
-    left: -15px;
-    width: 115%;
     height: 35px;
     text-align: center;
     padding-top: 5px;
+
 }
 .view-profile, .login-profile{
     color: black;
@@ -334,12 +340,12 @@ h5, label{
     font-weight: 600;
     margin-bottom: 5px;
 }
-p {
-    font-size:small;
-    font-weight: normal;
-    margin-bottom: 1rem;
-    display: inline;
-}
+/*p {*/
+    /*font-size:small;*/
+    /*font-weight: normal;*/
+    /*margin-bottom: 1rem;*/
+    /*display: inline;*/
+/*}*/
 .rated-by{
     font-weight: 600;
 }
@@ -405,13 +411,37 @@ cite img {
     text-decoration: none;
     color: #007bff;
 }
-
+.short-info-header{
+    font-weight: 500;
+}
 .short-info-desc{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 100px;
-    font-size: xx-small;
+    font-size: x-small;
     position: relative;
     display: initial;
+}
+
+.common-width{
+    width: 80%;
+}
+
+.our-goal{
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+.works-step {
+    margin-bottom: 50px;
+}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
 }
