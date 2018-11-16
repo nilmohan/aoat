@@ -22,7 +22,7 @@ Tuition Jugaard is just awesome! I just registered in the web site and getting l
 </Col>
 <Col  sm="4" md={{ size: 3, offset: 0 }}>
 <blockquote>
-I was looking for home tuitor in banglore. I tried a lot of other options. Then I found Tuition Jugaard. After registration in the website, I am getting lots of calls from heighly qulified teachers. Many thanks to tuition jugaard.
+I was looking for home tutor in banglore. I tried a lot of other options. Then I found Tuition Jugaard. After registration in the website, I am getting lots of calls from heighly qulified teachers. Many thanks to tuition jugaard.
 <cite><img src="https://firebasestorage.googleapis.com/v0/b/tuition-jugard-1cba8.appspot.com/o/customer-3.jpg?alt=media&token=f41ff03c-9e1d-4763-9254-b528c0bca9df" alt="Customer 3 photo"></img>(Student)Sanju Barma</cite>
 </blockquote>
 </Col>

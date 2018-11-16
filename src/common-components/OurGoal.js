@@ -13,7 +13,7 @@ const OurGoal = () => (
 <Row>
 <Col sm="12" md={{ size: 8, offset: 2 }} className="our-goal-individual-desc">
 <p className="long-copy">
-        Tuition Jugaard  helps you to find talented students and teachers in a single platform and tyring to generats as many as part time or full timejobs possible.
+        Tuition Jugaard  helps you to find talented students and teachers in a single platform and trying to generats as many as part time or full timejobs possible.
     </p>
 </Col>
 </Row>

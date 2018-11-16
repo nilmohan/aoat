@@ -8,6 +8,15 @@ const AboutUs = () => (
             <Col sm="12" md={{ size: 6, offset: 3 }}><h2>About Us</h2></Col>
         </Row>
         <Row>
+<Col sm="12" md={{ size: 3, offset: 0 }} >
+
+</Col>
+<Col sm="12" md={{ size: 3, offset: 0 }} >
+
+</Col>
+<Col sm="12" md={{ size: 6, offset: 0 }} >
+
+</Col>
 
         </Row>
 
