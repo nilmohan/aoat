@@ -434,6 +434,7 @@ cite img {
     font-weight: 300;
     font-size: 20px;
     text-rendering: optimizeLegibility;
+    background-color: #f4f4f4;
 }
 .works-step {
     margin-bottom: 50px;
@@ -444,4 +445,37 @@ cite img {
     display: block;
     height: 0;
     visibility: hidden;
+}
+.our-goal-desc-row{
+    margin: 0px 10px;
+}
+.our-goal-individual-desc p{
+    font-size: 1rem;
+}
+.long-copy{
+    text-align: center;
+}
+.user-view .local-h2{
+    color: white !important;
+}
+.how-it-works{
+    color: #343a40;
+}
+.tj-sq-big-logo-content{
+    text-align: center;
+}
+.square {
+    height: 250px;
+    width: 175px;
+    background-color: #343a40;
+    color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left: 45%;
+    text-align: center;
+}
+.big-logo-image{
+    font-size: 100px;
+    position: relative;
+    top: 40px;
 }

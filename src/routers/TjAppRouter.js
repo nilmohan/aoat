@@ -45,6 +45,8 @@ const TjAppRouter = (props) => {
     </div>
       <OurGola />
           <UserView />
+          <HowItWorks />
+          <AppFeedback />
       <AboutUs />
       <Footer/>
     </div>

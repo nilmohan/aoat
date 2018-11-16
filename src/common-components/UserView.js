@@ -5,7 +5,7 @@ import IPhone from '../images/app-iPhone.png';
 const AboutUs = () => (
     <section className="section-steps user-view" id="userView" >
         <Row>
-            <Col sm="12" md={{ size: 6, offset: 3 }}><h2>User's View</h2></Col>
+            <Col sm="12" md={{ size: 6, offset: 3 }}><h2 className="local-h2">User's View</h2></Col>
         </Row>
         <Row>
 <Col sm="4" md={{ size: 3, offset: 1 }}>

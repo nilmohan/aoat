@@ -3,14 +3,14 @@ import { Container, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import IPhone from '../images/app-iPhone.png';
 
 const HowItWorks = () => (
-<section className="section-steps" id="works">
+<section className="section-steps how-it-works" id="works">
     <Row>
         <Col sm="12" md={{ size: 6, offset: 3 }}><h2>How it works &mdash; Simple as 1, 2, 3</h2></Col>
     </Row>
 <Row>
 <Col xs="6">
-    <div className="col span-1-of-2 steps-box">
-    <img src="resources/img/app-iPhone.png" alt="Omnifood app on iPhone" className="app-screen js--wp-2" />
+    <div className="square">
+    <span className="big-logo-image">TJ</span>
     </div>
     </Col>
 <Col xs="6">
